@@ -1,1 +1,1 @@
-This is an overview of the map project.
+This is a map showing places around Nanzhi where I do different activities.

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>Project #5 Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,7 +18,7 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">DocStrap</a>
+			<a class="brand" href="index.html">Project #5</a>
 			<ul class="nav">
 				
 			</ul>
@@ -64,14 +64,19 @@
 </blockquote>
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#options">Options</a></li>
+<li><a href="#links">Links</a></li>
 <li><a href="#resources">Resources</a></li>
 <li><a href="#project-first-steps">Project First Steps</a></li>
 <li><a href="#license-and-copyright">License and Copyright</a></li>
 </ul>
 <h2>Overview</h2>
-<p>This is an overview of the map project.</p>
-<h2>Options</h2>
+<p>This is a map showing places around Nanzhi where I do different activities.</p>
+<h2>Links</h2>
+<ul>
+<li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/">Live web site</a></li>
+<li><a href="https://github.com/Ripley6811/frontend-nanodegree-map-project/tree/gh-pages">Git repository</a></li>
+<li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/jsdoc/">Documentation</a></li>
+</ul>
 <h2>Resources</h2>
 <ul>
 <li><a href="https://developers.google.com">developers.google.com</a><ul>
@@ -89,7 +94,7 @@
 <blockquote>
 <p>This is a log of how I created the basic files and file structure. I used <strong>Git Shell</strong> for command prompt entries. File editing done in both <strong><a href="http://notepad-plus-plus.org/">Notepad++</a></strong> and <strong><a href="http://brackets.io/">Brackets</a></strong>.</p>
 </blockquote>
-<h5>1) Create package.json with <code>npm init</code></h5>
+<h4>1) Create package.json with <code>npm init</code></h4>
 <p>Defaults are provided in parenthesis.</p>
 <pre><code class="lang-sh">&gt;npm init
 name: (frontend-nanodegree-map-project)
@@ -101,7 +106,7 @@ git repository: https://github.com/Ripley6811/frontend-nanodegree-map-project.gi
 keywords:
 author: Jay W Johnson
 license: (ISC) MIT</code></pre>
-<h5>2) Install Grunt and plugins with <code>npm install &lt;module&gt; --save-dev</code></h5>
+<h4>2) Install Grunt and plugins with <code>npm install &lt;module&gt; --save-dev</code></h4>
 <pre><code class="lang-sh">&gt;npm install grunt --save-dev
 &gt;npm install grunt-contrib-uglify --save-dev
 &gt;npm install grunt-contrib-cssmin --save-dev
@@ -110,7 +115,7 @@ license: (ISC) MIT</code></pre>
 &gt;npm install grunt-jsdoc --save-dev
 &gt;# npm install ink-docstrap --save-dev</code></pre>
 <p>Note that <strong>grunt-jsdoc</strong> includes <strong>ink-docstrap</strong>.</p>
-<h5>3) Create <code>Gruntfile.js</code></h5>
+<h4>3) Create <code>Gruntfile.js</code></h4>
 <ol>
 <li>In <strong>Brackets</strong>, right click in directory tree and select <strong>New File</strong></li>
 <li>Name the file <strong>Gruntfile.js</strong></li>
@@ -136,7 +141,7 @@ license: (ISC) MIT</code></pre>
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
 };</code></pre>
-<h5>4) Set up <code>README.tmpl.md</code></h5>
+<h4>4) Set up <code>README.tmpl.md</code></h4>
 <blockquote>
 <p>README.tmpl.md is the template that grunt-readme uses to stitch together the final README.md file. This and all other README template files live in the <strong>docs</strong> directory.</p>
 </blockquote>
@@ -145,7 +150,7 @@ license: (ISC) MIT</code></pre>
 <li>Copy <code>BASIC.tmpl.md</code> or another template from <strong>grunt-readme/templates</strong> to the <strong>docs</strong> folder.</li>
 <li>Add/configure optional *.md files to include in final README.md</li>
 </ol>
-<h5>5) Set up <code>grunt-watch</code></h5>
+<h4>5) Set up <code>grunt-watch</code></h4>
 <ul>
 <li>Watch <code>*.js</code> files and run <strong>grunt-contrib-uglify</strong> and <strong>grunt-jsdoc</strong>.</li>
 <li>Watch <code>*.md</code> files and run <strong>grunt-readme</strong> and <strong>grunt-jsdoc</strong>.</li>
@@ -166,7 +171,7 @@ license: (ISC) MIT</code></pre>
                 },
             }
         },</code></pre>
-<h5>6) HTML assets</h5>
+<h4>6) HTML assets</h4>
 <ol>
 <li>Placed <code>index.html</code> in the root directory.</li>
 <li>The <strong>src</strong> directory contains all the source css and js files. </li>

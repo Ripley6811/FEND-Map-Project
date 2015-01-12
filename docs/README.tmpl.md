@@ -7,8 +7,8 @@
 ## Overview
 {%= _.doc("overview.md") %}
 
-## Options
-{%= _.doc("options.md") %}
+## Links
+{%= _.doc("links.md") %}
 
 ## Resources
 {%= _.doc("resources.md") %}
