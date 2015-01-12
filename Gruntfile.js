@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = function(grunt) {
-
+    'use strict';
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -22,7 +20,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'src/',
                     // Use "!" to exclude previous "min" files in order to overwrite them.
-                    src: ['*.css','!*.min.css'],
+                    src: ['*.css', '!*.min.css'],
                     dest: 'build/',
                     ext: '.min.css'
                 }]
@@ -30,23 +28,23 @@ module.exports = function(grunt) {
         },
         watch: {
             src: {
-                files: ['src/*.js', 'README.md'],
-                tasks: ['uglify','jsdoc'],
+                files: ['src/*.js'],
+                tasks: ['uglify', 'jsdoc'],
                 options: {
-                    spawn: false,
-                },
+                    spawn: false
+                }
             },
             markdown: {
                 files: ['docs/*.md'],
-                tasks: ['readme','jsdoc'],
+                tasks: ['readme', 'jsdoc'],
                 options: {
-                    spawn: false,
-                },
+                    spawn: false
+                }
             }
         },
         jsdoc : {
             docstrap : {
-                src: ['js/*.js', 'README.md'], 
+                src: ['js/*.js', 'README.md'],
                 options: {
                     destination: 'jsdoc',
                     template : 'node_modules/ink-docstrap/template',
@@ -64,6 +62,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jsdoc');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify','cssmin','readme','jsdoc','watch']);
+    grunt.registerTask('default', ['uglify', 'cssmin', 'readme', 'jsdoc', 'watch']);
 
 };

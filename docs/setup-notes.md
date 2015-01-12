@@ -64,7 +64,33 @@ module.exports = function(grunt) {
 1. Add/configure optional *.md files to include in final README.md
 
 
+#####5) Set up `grunt-watch`
+- Watch `*.js` files and run **grunt-contrib-uglify** and **grunt-jsdoc**.
+- Watch `*.md` files and run **grunt-readme** and **grunt-jsdoc**.
 
+```javascript
+        watch: {
+            src: {
+                files: ['src/*.js'],
+                tasks: ['uglify','jsdoc'],
+                options: {
+                    spawn: false,
+                },
+            },
+            markdown: {
+                files: ['docs/*.md'],
+                tasks: ['readme','jsdoc'],
+                options: {
+                    spawn: false,
+                },
+            }
+        },
+```
+
+#####6) HTML assets
+1. Placed `index.html` in the root directory.
+2. The **src** directory contains all the source css and js files. 
+3. The **build** directory contains minified css and js used by `index.html`
 
 
 
