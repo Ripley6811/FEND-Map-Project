@@ -10,8 +10,8 @@
 ## Options
 {%= _.doc("options.md") %}
 
-## Examples
-{%= _.doc("examples.md") %}
+## Resources
+{%= _.doc("resources.md") %}
 
 ## Project First Steps
 {%= _.doc("setup-notes.md") %}

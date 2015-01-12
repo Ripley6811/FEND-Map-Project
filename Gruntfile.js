@@ -27,9 +27,16 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            src: {
+            js: {
                 files: ['src/*.js'],
                 tasks: ['uglify', 'jsdoc'],
+                options: {
+                    spawn: false
+                }
+            },
+            css: {
+                files: ['src/*.css'],
+                tasks: ['cssmin'],
                 options: {
                     spawn: false
                 }
@@ -44,7 +51,7 @@ module.exports = function(grunt) {
         },
         jsdoc : {
             docstrap : {
-                src: ['js/*.js', 'README.md'],
+                src: ['src/*.js', 'README.md'],
                 options: {
                     destination: 'jsdoc',
                     template : 'node_modules/ink-docstrap/template',
