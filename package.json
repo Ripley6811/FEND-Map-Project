@@ -1,0 +1,36 @@
+{
+  "name": "frontend-nanodegree-map-project",
+  "version": "1.0.0",
+  "description": "Frontend Nanodegree Project 5 - Neighborhood Map",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ripley6811/frontend-nanodegree-map-project.git"
+  },
+  "author": {
+    "name":  "Jay W Johnson",
+    "url": "https://github.com/Ripley6811"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gruntjs/grunt-contrib-concat/blob/master/LICENSE-MIT"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Ripley6811/frontend-nanodegree-map-project/issues"
+  },
+  "homepage": "https://github.com/Ripley6811/frontend-nanodegree-map-project",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.11.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.5.7",
+    "grunt-readme": "^0.4.5",
+    "ink-docstrap": "^0.4.12"
+  }
+}

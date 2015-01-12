@@ -1,0 +1,73 @@
+### Steps for setting up directory structure
+>This is a log of how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
+
+##### 1) Create package.json with `npm init`
+Defaults are provided in parenthesis.
+```sh
+>npm init
+name: (frontend-nanodegree-map-project)
+version: (1.0.0)
+description: Frontend Nanodegree Project 5 - Neighborhood Map
+entry point: (index.js) index.html
+test command: test
+git repository: https://github.com/Ripley6811/frontend-nanodegree-map-project.git
+keywords:
+author: Jay W Johnson
+license: (ISC) MIT
+```
+
+##### 2) Install Grunt and plugins with `npm install <module> --save-dev`
+
+```sh
+>npm install grunt --save-dev
+>npm install grunt-contrib-uglify --save-dev
+>npm install grunt-contrib-cssmin --save-dev
+>npm install grunt-contrib-watch --save-dev
+>npm install grunt-readme --save-dev
+>npm install grunt-jsdoc --save-dev
+># npm install ink-docstrap --save-dev
+```
+Note that **grunt-jsdoc** includes **ink-docstrap**.
+
+##### 3) Create `Gruntfile.js`
+0. In **Brackets**, right click in directory tree and select **New File**
+0. Name the file **Gruntfile.js**
+0. Copy the basic uglify code from Grunt web site or from another project.
+
+Simple uglify Gruntfile.js from Grunt web site:
+```javascript
+module.exports = function(grunt) {
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: 'src/<%= pkg.name %>.js',
+        dest: 'build/<%= pkg.name %>.min.js'
+      }
+    }
+  });
+  // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // Default task(s).
+  grunt.registerTask('default', ['uglify']);
+};
+```
+
+#####4) Set up `README.tmpl.md`
+
+0. Create **docs** folder.
+0. Copy `BASIC.tmpl.md` or another template from **grunt-readme/templates** to the **docs** folder.
+1. Add/configure optional *.md files to include in final README.md
+
+
+
+
+
+
+[Brackets]:http://brackets.io/
+[Notepad++]:http://notepad-plus-plus.org/
+[grunt]: http://gruntjs.com/
