@@ -1,3 +1,6 @@
+/**
+ * Application namespace for functions and variables.
+ */
 var app = app || {};
 
 /**
@@ -13,55 +16,47 @@ app.addMap = function() {
     document.querySelector('body').appendChild(mapDiv);
     
     var mapOptions = {
-      center: new google.maps.LatLng(22.735281, 120.333368),
-      zoom: 14, // 0-22
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+        center: new google.maps.LatLng(22.735281, 120.333368),
+        zoom: 14, // 0 to 22
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
     app.map = new google.maps.Map(mapDiv, mapOptions);
     
+    // Add each marker from the list in features.js.
     for (var i = 0; i < app.features.length; i++) {
         app.addMapMarker(app.features[i]);
     };
-}
+    
+    // Add each photo that has coordinates from my Flickr account.
+    var photos = app.getPhotoList(app.addPhotoMarkers);    
+};
 document.addEventListener('DOMContentLoaded', app.addMap);
 
-app.features = [
-    {
-        title: 'Archery range',
-        position: new google.maps.LatLng(22.734471, 120.333068),
-        icon: 'icons/archery.png'
-    },
-    {
-        title: 'Jogging in the park',
-        position: new google.maps.LatLng(22.731795, 120.316772),
-        icon: 'icons/jogging.png'
-    },
-    {
-        title: 'Mountain hiking',
-        position: new google.maps.LatLng(22.725501, 120.370888),
-        icon: 'icons/hiking.png'
-    },
-    {
-        title: 'Swimming pool',
-        position: new google.maps.LatLng(22.733508, 120.331715),
-        icon: 'icons/swimming.png'
-    },
-    {
-        title: 'Bicycle maintenance',
-        position: new google.maps.LatLng(22.731711, 120.329520),
-        icon: 'icons/cycling.png'
-    },
-]
+/**
+ * Process a list of photo response objects from Flickr and
+ * adds a marker to the map if the photo has coordinates.
+ * @param {Object} xmlResponse JSON response object from Flickr.
+ */
+app.addPhotoMarkers = function(xmlResponse) {
+    var photos = xmlResponse.photos.photo;
+    for (var i = 0; i < photos.length; i++) {
+        app.getPhotoGeo(photos[i], function(photo) {
+            photo.icon = 'icons/photo.png';
+            app.addMapMarker(photo);
+        });
+    };
+};
 
 /**
  * Add a marker to the map.
- * @param {Object} feature Contains title, coordinate, and icon for marker.
+ * @param {Object} feature Contains title, position, and icon for marker.
  */
 app.addMapMarker = function(feature) {
+    var p = feature.position;
     var mapMarker = new google.maps.Marker({
-        position: feature.position,
+        position: new google.maps.LatLng( p.lat, p.lon ),
         map: app.map,
         title: feature.title,
         icon: feature.icon
     });
-}
+};

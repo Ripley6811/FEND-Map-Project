@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Source: app.js</title>
+	<title>Project #5 Global</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -42,82 +42,150 @@
 	<div class="row-fluid">
 
 		
-			<div class="span12">
-				
+		<div class="span8">
+			
 				<div id="main">
 					
 
 
-		<h1 class="page-title">Source: app.js</h1>
-    
+	<h1 class="page-title">Global</h1>
 <section>
-	<article>
-		<pre
-			class="sunlight-highlight-javascript linenums">/**
- * Application namespace for functions and variables.
- */
-var app = app || {};
 
-/**
- * Adds a google map div element to html body.
- */
-app.addMap = function() {
-    'use strict';
-    var mapDiv = document.createElement('div');
-    mapDiv.id = 'map-canvas';
-    mapDiv.style.backgroundColor = '#fb4';
-    mapDiv.style.width = '100%';
-    mapDiv.style.minHeight = '100%';
-    document.querySelector('body').appendChild(mapDiv);
+<header>
+    <h2>
     
-    var mapOptions = {
-        center: new google.maps.LatLng(22.735281, 120.333368),
-        zoom: 14, // 0 to 22
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    app.map = new google.maps.Map(mapDiv, mapOptions);
+    </h2>
     
-    // Add each marker from the list in features.js.
-    for (var i = 0; i &lt; app.features.length; i++) {
-        app.addMapMarker(app.features[i]);
-    };
-    
-    // Add each photo that has coordinates from my Flickr account.
-    var photos = app.getPhotoList(app.addPhotoMarkers);    
-};
-document.addEventListener('DOMContentLoaded', app.addMap);
+</header>
 
-/**
- * Process a list of photo response objects from Flickr and
- * adds a marker to the map if the photo has coordinates.
- * @param {Object} xmlResponse JSON response object from Flickr.
- */
-app.addPhotoMarkers = function(xmlResponse) {
-    var photos = xmlResponse.photos.photo;
-    for (var i = 0; i &lt; photos.length; i++) {
-        app.getPhotoGeo(photos[i], function(photo) {
-            photo.icon = 'icons/photo.png';
-            app.addMapMarker(photo);
-        });
-    };
-};
+<article>
+    <div class="container-overview">
+    
 
-/**
- * Add a marker to the map.
- * @param {Object} feature Contains title, position, and icon for marker.
- */
-app.addMapMarker = function(feature) {
-    var p = feature.position;
-    var mapMarker = new google.maps.Marker({
-        position: new google.maps.LatLng( p.lat, p.lon ),
-        map: app.map,
-        title: feature.title,
-        icon: feature.icon
-    });
-};</pre>
-	</article>
+    
+        
+
+        
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<dt class="name" id="app">
+    <h4><span class="type-signature"></span>app<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Application namespace for functions and variables.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="app.js.html">app.js</a>,
+				 <a href="app.js.html#sunlight-1-line-4">line 4</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -141,6 +209,10 @@ app.addMapMarker = function(feature) {
 				</footer>
 			</div>
 
+			
+			<div class="span3">
+				<div id="toc"></div>
+			</div>
 			
 			<br clear="both">
 		</div>
