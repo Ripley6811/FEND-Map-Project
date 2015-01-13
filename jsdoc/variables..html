@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Source: photos.js</title>
+	<title>Project #5 Namespace: Application namespace for functions and variables.</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,7 +28,7 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="app.html">app</a>
+							<a href="variables..html">Application namespace for functions and variables.</a>
 						</li>
 						
 
@@ -42,82 +42,95 @@
 	<div class="row-fluid">
 
 		
-			<div class="span12">
-				
+		<div class="span8">
+			
 				<div id="main">
 					
 
 
-		<h1 class="page-title">Source: photos.js</h1>
-    
+	<h1 class="page-title">Namespace: Application namespace for functions and variables.</h1>
 <section>
-	<article>
-		<pre
-			class="sunlight-highlight-javascript linenums">
-var app = app || {};
 
-/**
- * Request a list of my photos from Flickr.
- * @param {Function} callback Requests geo info for each photo.
- */
-app.getPhotoList = function(callback) {
-    'use strict';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            callback(JSON.parse(xmlhttp.response));
-        }
-    };
+<header>
+    <h2>
+    Application namespace for functions and variables.
+    </h2>
     
-    var requestParams = [
-        'method=flickr.people.getPublicPhotos',
-        'api_key=0111e8c95512c6cfe3546f7a77517620',
-        'user_id=91602303%40N03',
-        'per_page=500',
-        'format=json',
-        'nojsoncallback=1'
-    ];
-    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
-    xmlhttp.send();
-};
+</header>
 
-/**
- * Request the geo information for a photo and adds it to the photo
- * object. This only runs the callback if a location exists. Used in
- * `app.addPhotoMarkers`.
- * @param {Object}   photo    JSON returned for a Flickr photo.
- * @param {Function} callback Adds photos with geolocation to map.
- * @see app.addPhotoMarkers
- */
-app.getPhotoGeo = function(photo, callback) {
-    'use strict';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            var json = JSON.parse(xmlhttp.response);
-            // stat 'ok' if coordinates exists.
-            if (json.stat === 'ok') {
-                photo.position = { lat: json.photo.location.latitude,
-                                   lon: json.photo.location.longitude };
-                callback(photo);
-            }
-        }
-    };
+<article>
+    <div class="container-overview">
     
-    var requestParams = [
-        'method=flickr.photos.geo.getLocation',
-        'api_key=0111e8c95512c6cfe3546f7a77517620',
-        'photo_id=' + photo.id,
-        'format=json',
-        'nojsoncallback=1'
-    ];
-    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
-    xmlhttp.send();
+
     
-};</pre>
-	</article>
+        
+
+        
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="app.js.html">app.js</a>,
+				 <a href="app.js.html#sunlight-1-line-1">line 1</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -141,6 +154,10 @@ app.getPhotoGeo = function(photo, callback) {
 				</footer>
 			</div>
 
+			
+			<div class="span3">
+				<div id="toc"></div>
+			</div>
 			
 			<br clear="both">
 		</div>

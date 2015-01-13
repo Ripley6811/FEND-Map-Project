@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Source: photos.js</title>
+	<title>Project #5 Source: features.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,73 +48,49 @@
 					
 
 
-		<h1 class="page-title">Source: photos.js</h1>
+		<h1 class="page-title">Source: features.js</h1>
     
 <section>
 	<article>
 		<pre
-			class="sunlight-highlight-javascript linenums">
-var app = app || {};
+			class="sunlight-highlight-javascript linenums">var app = app || {};
 
 /**
- * Request a list of my photos from Flickr.
- * @param {Function} callback Requests geo info for each photo.
+ * List of feature objects.
+ * &lt;ul>
+ * &lt;li>title - Description string for icon on map.
+ * &lt;li>position { lat: ##.##, lon: ##.## }
+ * &lt;li>icon - Path to image to use on map.
+ * &lt;/ul>
+ * @type {Array.&lt;Object>}
  */
-app.getPhotoList = function(callback) {
-    'use strict';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            callback(JSON.parse(xmlhttp.response));
-        }
-    };
-    
-    var requestParams = [
-        'method=flickr.people.getPublicPhotos',
-        'api_key=0111e8c95512c6cfe3546f7a77517620',
-        'user_id=91602303%40N03',
-        'per_page=500',
-        'format=json',
-        'nojsoncallback=1'
-    ];
-    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
-    xmlhttp.send();
-};
-
-/**
- * Request the geo information for a photo and adds it to the photo
- * object. This only runs the callback if a location exists. Used in
- * `app.addPhotoMarkers`.
- * @param {Object}   photo    JSON returned for a Flickr photo.
- * @param {Function} callback Adds photos with geolocation to map.
- * @see app.addPhotoMarkers
- */
-app.getPhotoGeo = function(photo, callback) {
-    'use strict';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            var json = JSON.parse(xmlhttp.response);
-            // stat 'ok' if coordinates exists.
-            if (json.stat === 'ok') {
-                photo.position = { lat: json.photo.location.latitude,
-                                   lon: json.photo.location.longitude };
-                callback(photo);
-            }
-        }
-    };
-    
-    var requestParams = [
-        'method=flickr.photos.geo.getLocation',
-        'api_key=0111e8c95512c6cfe3546f7a77517620',
-        'photo_id=' + photo.id,
-        'format=json',
-        'nojsoncallback=1'
-    ];
-    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
-    xmlhttp.send();
-    
-};</pre>
+app.features = [
+    {
+        title: 'Archery range',
+        position: { lat: 22.734471, lon: 120.333068 },
+        icon: 'icons/archery.png'
+    },
+    {
+        title: 'Jogging in the park',
+        position: { lat: 22.731795, lon: 120.316772 },
+        icon: 'icons/jogging.png'
+    },
+    {
+        title: 'Mountain hiking',
+        position: { lat: 22.725501, lon: 120.370888 },
+        icon: 'icons/hiking.png'
+    },
+    {
+        title: 'Swimming pool',
+        position: { lat: 22.733508, lon: 120.331715 },
+        icon: 'icons/swimming.png'
+    },
+    {
+        title: 'Bicycle maintenance',
+        position: { lat: 22.731711, lon: 120.329520 },
+        icon: 'icons/cycling.png'
+    }
+];</pre>
 	</article>
 </section>
 

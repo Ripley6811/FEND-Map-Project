@@ -1,5 +1,6 @@
 /**
  * Application namespace for functions and variables.
+ * @namespace app
  */
 var app = app || {};
 
@@ -34,11 +35,13 @@ document.addEventListener('DOMContentLoaded', app.addMap);
 
 /**
  * Process a list of photo response objects from Flickr and
- * adds a marker to the map if the photo has coordinates.
- * @param {Object} xmlResponse JSON response object from Flickr.
+ * adds a marker to the map if the photo has coordinates. Used as
+ * a callback for `app.getPhotoList`.
+ * @param {Object} jsonResponse JSON response object from Flickr.
+ * @see app.getPhotoList
  */
-app.addPhotoMarkers = function(xmlResponse) {
-    var photos = xmlResponse.photos.photo;
+app.addPhotoMarkers = function(jsonResponse) {
+    var photos = jsonResponse.photos.photo;
     for (var i = 0; i < photos.length; i++) {
         app.getPhotoGeo(photos[i], function(photo) {
             photo.icon = 'icons/photo.png';

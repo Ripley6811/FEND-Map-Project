@@ -1,5 +1,14 @@
 var app = app || {};
 
+/**
+ * List of feature objects.
+ * <ul>
+ * <li>title - Description string for icon on map.
+ * <li>position { lat: ##.##, lon: ##.## }
+ * <li>icon - Path to image to use on map.
+ * </ul>
+ * @type {Array.<Object>}
+ */
 app.features = [
     {
         title: 'Archery range',
