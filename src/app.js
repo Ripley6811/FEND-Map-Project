@@ -60,6 +60,7 @@ app.addMapMarker = function(feature) {
         position: new google.maps.LatLng( p.lat, p.lon ),
         map: app.map,
         title: feature.title,
-        icon: feature.icon
+        icon: feature.icon,
+        animation: google.maps.Animation.DROP
     });
 };

@@ -1,10 +1,10 @@
 var app = app || {};
 
 /**
- * List of feature objects.
+ * List of feature objects. Each has three keys:
  * <ul>
  * <li>title - Description string for icon on map.
- * <li>position { lat: ##.##, lon: ##.## }
+ * <li>position - { lat: ##.##, lon: ##.## }
  * <li>icon - Path to image to use on map.
  * </ul>
  * @type {Array.<Object>}
