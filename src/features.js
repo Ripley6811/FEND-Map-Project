@@ -12,7 +12,7 @@ var app = app || {};
 app.features = [
     {
         title: 'Archery range',
-        position: { lat: 22.734471, lon: 120.333068 },
+        position: { lat: 22.734782, lon: 120.332857 },
         icon: 'icons/archery.png'
     },
     {
@@ -32,7 +32,7 @@ app.features = [
     },
     {
         title: 'Bicycle maintenance',
-        position: { lat: 22.731711, lon: 120.329520 },
+        position: { lat: 22.731606, lon: 120.329661 },
         icon: 'icons/cycling.png'
     }
 ];

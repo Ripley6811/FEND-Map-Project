@@ -66,8 +66,8 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 /**
- * Create a KnockoutJS view model instance for lower right interactive
- * div.
+ * Create a KnockoutJS view model instance for the lower right 
+ * interactive div.
  */
 app.viewModel = new (function() {
     this.searchPhrase = ko.observable('random words');
@@ -75,9 +75,42 @@ app.viewModel = new (function() {
     this.features = ko.observableArray();
     
     this.panTo = function(feature) {
-        app.map.panTo(new google.maps.LatLng(feature.position.lat, feature.position.lon));
+        app.map.panTo(feature.marker.getPosition());
+        app.showInfoWindow(feature);
     };
 })();
+
+/**
+ * Opens an info window above a feature marker.
+ * @param {Object} feature An object containing a marker.
+ */
+app.showInfoWindow = function(feature) {
+    var imgDiv = '';
+    // Add Flickr image link if it is an image feature.
+    // If not an image feature than attempt StreetView image.
+    if (feature.farm) {
+        imgDiv = '<img src="https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg" alt="{title}"><br>';
+        imgDiv = imgDiv.replace('{farm-id}', feature.farm);
+        imgDiv = imgDiv.replace('{server-id}', feature.server);
+        imgDiv = imgDiv.replace('{id}', feature.id);
+        imgDiv = imgDiv.replace('{secret}', feature.secret);
+        imgDiv = imgDiv.replace('[mstzb]', 'n');
+        imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
+    } else {
+        imgDiv = '<img src="http://maps.googleapis.com/maps/api/streetview?size={size}&location={location}" alt="{title}"><br>';
+        imgDiv = imgDiv.replace('{size}', '320x200');
+        var p = feature.position;
+        imgDiv = imgDiv.replace('{location}', [p.lat, p.lon].join(','));
+        imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
+    }
+    // Keep reference to open infoWindow for closing and replacing.
+    if (app.infoWindow) app.infoWindow.close();
+    app.infoWindow = new google.maps.InfoWindow({
+        content: '<div style="text-align: center">' + imgDiv + 
+                 feature.title.replace(/"/g, '&quot;') + '</div>'
+    });
+    app.infoWindow.open(app.map, feature.marker);
+};
 
 /**
  * Add a google map to the map div element.
@@ -98,7 +131,6 @@ app.addMapToDiv = function(mapDiv) {
 app.addFeaturesToMap = function() {
     for (var i = 0; i < app.features.length; i++) {
         app.addMapMarker(app.features[i]);
-        app.viewModel.features.push(app.features[i]);
     };
 };
 
@@ -114,7 +146,6 @@ app.addPhotoMarkers = function(photoList) {
         app.getPhotoGeo(photoList[i], function(photo) {
             photo.icon = 'icons/photo.png';
             app.addMapMarker(photo);
-            app.viewModel.features.push(photo);
         });
     }
 };
@@ -124,12 +155,19 @@ app.addPhotoMarkers = function(photoList) {
  * @param {Object} feature Contains title, position, and icon for marker.
  */
 app.addMapMarker = function(feature) {
+    // Add google maps marker to feature object.
     var p = feature.position;
-    var mapMarker = new google.maps.Marker({
+    feature.marker = new google.maps.Marker({
         position: new google.maps.LatLng( p.lat, p.lon ),
         map: app.map,
         title: feature.title,
         icon: feature.icon,
         animation: google.maps.Animation.DROP
     });
+    // Add a listener for clicking on icon.
+    google.maps.event.addListener(feature.marker, 'click', function() {
+        app.showInfoWindow(feature);
+    });
+    // Add feature with marker to the knockoutjs observable list.
+    app.viewModel.features.push(feature);
 };
