@@ -31,8 +31,8 @@ This is a map showing places around Nanzhi where I do different activities.
     - [Flickr API Methods]
     - [Demonstration of flickr.people.getPublicPhotos request]
 - [How to use the Flickr API](http://kylerush.net/blog/flickr-api/)
-
-
+- [Knockoutjs tutorial](http://learn.knockoutjs.com/#/?tutorial=intro)
+- [How to data-bind to image path with KnockoutJS](http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working)
 
 
 

@@ -35,6 +35,20 @@
 					</ul>
 				</li>
 				
+				<li class="dropdown">
+					<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="global.html#initialize">initialize</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
 			</ul>
 		</div>
 	</div>
@@ -58,55 +72,90 @@
  * @namespace app
  */
 var app = app || {};
+app.center = new google.maps.LatLng(22.735281, 120.353368)
 
 /**
- * Add a google map in a div element to html body.
+ * Create and add DOM elements and run code for filling elements.
  */
-app.addMap = function() {
+function initialize() {
     'use strict';
     // Create, configure and append a map div.
     var mapDiv = document.createElement('div');
-    mapDiv.id = 'map-canvas';
+    mapDiv.id = 'map-canvas';  // Delete this?
     mapDiv.style.backgroundColor = 'gold';
     mapDiv.style.width = '100%';
     mapDiv.style.minHeight = '100%';
     document.querySelector('body').appendChild(mapDiv);
     
+    app.addMapToDiv(mapDiv);
+    
+    // Add interactive div in lower right for search and selection.
+    var legendDiv = document.createElement('div');
+    legendDiv.id = 'legend';  // Delete this?
+    legendDiv.style.backgroundColor = 'white';
+    legendDiv.style.padding = '10px';
+    legendDiv.style.margin = '10px';
+    legendDiv.innerHTML = 'Search';
+    document.querySelector('body').appendChild(legendDiv);
+    
+    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
+    
+    // Add markers from the list in features.js.
+    app.addFeaturesToMap();
+    
+    // Add photos that have coordinates from my Flickr account.
+    app.getPhotoList(app.addPhotoMarkers);
+    
+    // Add search bar functionality.
+    var entryDiv = document.createElement('div');
+    entryDiv.innerHTML = '&lt;input data-bind="value: searchPhrase">';
+    legendDiv.appendChild(entryDiv);
+    
+    // Add clickable feature list
+    var listDiv = document.createElement('div');
+    listDiv.style.maxHeight = '300px';
+    listDiv.style.overflow = 'auto';
+    listDiv.innerHTML = [
+        '&lt;table>',
+        '&lt;tbody data-bind="foreach: features">',
+        '&lt;tr data-bind="click: $root.panTo">',
+        '&lt;td>&lt;img alt="feature icon" data-bind="attr: {src: icon}" />&lt;/td>',
+        '&lt;td data-bind="text: title">&lt;/td>',
+        '&lt;/tr>',
+        '&lt;/tbody>',
+        '&lt;/table>'
+    ].join('');
+    legendDiv.appendChild(listDiv);
+    ko.applyBindings(app.viewModel);
+    
+    // app.map.panTo(LatLng) 
+}
+//document.addEventListener('DOMContentLoaded', initialize);
+// Why does the google maps listener load the map faster?
+google.maps.event.addDomListener(window, 'load', initialize);
+
+/**
+ * Add a google map to the map div element.
+ */
+app.addMapToDiv = function(mapDiv) {
     // Configure and add map to map div.
     var mapOptions = {
-        center: new google.maps.LatLng(22.735281, 120.333368),
+        center: app.center,
         zoom: 14, // 0 to 22
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     app.map = new google.maps.Map(mapDiv, mapOptions);
-    
-    // Add markers from the list in features.js.
+};
+
+/**
+ * Add markers from the list in features.js.
+ */
+app.addFeaturesToMap = function() {
     for (var i = 0; i &lt; app.features.length; i++) {
         app.addMapMarker(app.features[i]);
+        app.viewModel.features.push(app.features[i]);
     };
-    
-    // Add photos that have coordinates from my Flickr account.
-    var photos = app.getPhotoList(app.addPhotoMarkers);
-    
-    // Add search bar functionality.
-    
-    
-    // Add interactive feature list.
-    var legendDiv = document.createElement('div');
-    legendDiv.id = 'legend';
-    legendDiv.style.backgroundColor = 'white';
-    legendDiv.style.padding = '10px';
-    legendDiv.style.margin = '10px';
-    legendDiv.innerHTML = 'Legend';
-    document.querySelector('body').appendChild(legendDiv);
-    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
-    
-    
-    // app.map.panTo(LatLng) 
-    
 };
-//document.addEventListener('DOMContentLoaded', app.addMap);
-google.maps.event.addDomListener(window, 'load', app.addMap);
 
 /**
  * Process a list of photo response objects from Flickr and
@@ -120,8 +169,9 @@ app.addPhotoMarkers = function(photoList) {
         app.getPhotoGeo(photoList[i], function(photo) {
             photo.icon = 'icons/photo.png';
             app.addMapMarker(photo);
+            app.viewModel.features.push(photo);
         });
-    };
+    }
 };
 
 /**
@@ -137,7 +187,17 @@ app.addMapMarker = function(feature) {
         icon: feature.icon,
         animation: google.maps.Animation.DROP
     });
-};</pre>
+};
+
+app.viewModel = new (function() {
+    this.searchPhrase = ko.observable('random words');
+    
+    this.features = ko.observableArray();
+    
+    this.panTo = function(feature) {
+        app.map.panTo(new google.maps.LatLng(feature.position.lat, feature.position.lon));
+    };
+})();</pre>
 	</article>
 </section>
 

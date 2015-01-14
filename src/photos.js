@@ -42,6 +42,7 @@ app.getPhotoList = function(callback) {
  */
 app.getPhotoGeo = function(photo, callback) {
     'use strict';
+//    if (photo.title.substring(0, 2) === '20') return;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
