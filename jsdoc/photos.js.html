@@ -106,8 +106,6 @@ app.getPhotoGeo = function(photo, callback) {
                 photo.position = { lat: json.photo.location.latitude,
                                    lon: json.photo.location.longitude };
                 callback(photo);
-            } else {
-                console.log("ERROR in app.getPhotoGeo: " + json.message);
             }
         }
     };
