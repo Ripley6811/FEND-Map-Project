@@ -66,6 +66,20 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 /**
+ * Create a KnockoutJS view model instance for lower right interactive
+ * div.
+ */
+app.viewModel = new (function() {
+    this.searchPhrase = ko.observable('random words');
+    
+    this.features = ko.observableArray();
+    
+    this.panTo = function(feature) {
+        app.map.panTo(new google.maps.LatLng(feature.position.lat, feature.position.lon));
+    };
+})();
+
+/**
  * Add a google map to the map div element.
  */
 app.addMapToDiv = function(mapDiv) {
@@ -119,13 +133,3 @@ app.addMapMarker = function(feature) {
         animation: google.maps.Animation.DROP
     });
 };
-
-app.viewModel = new (function() {
-    this.searchPhrase = ko.observable('random words');
-    
-    this.features = ko.observableArray();
-    
-    this.panTo = function(feature) {
-        app.map.panTo(new google.maps.LatLng(feature.position.lat, feature.position.lon));
-    };
-})();
