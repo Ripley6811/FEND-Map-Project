@@ -42,6 +42,24 @@ function initialize() {
     entryDiv.innerHTML = '<input data-bind="value: searchPhrase">';
     legendDiv.appendChild(entryDiv);
     
+    // Add color legend above list.
+    var colorLegendDiv = document.createElement('div');
+    colorLegendDiv.style.padding = '10px';
+    colorLegendDiv.innerHTML = [
+        '<table>',
+        '<tbody>',
+        '<tr>',
+        '<td><img src="icons/orange_blank.png" width="20"></td>',
+        '<td>My Activities</td>',
+        '<td width="25"></td>',
+        '<td><img src="icons/purple_blank.png" width="20"></td>',
+        '<td>My Photos</td>',
+        '</tr>',
+        '</tbody>',
+        '</table>'
+    ].join('');
+    legendDiv.appendChild(colorLegendDiv);
+    
     // Add clickable feature list
     var listDiv = document.createElement('div');
     listDiv.style.maxHeight = '300px';
@@ -71,6 +89,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
  */
 app.viewModel = new (function() {
     this.searchPhrase = ko.observable('random words');
+    
+    this.runSearch = ko.computed(function() {
+        console.log(this.searchPhrase());
+    }, this);
     
     this.features = ko.observableArray();
     
