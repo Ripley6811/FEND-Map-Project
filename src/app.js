@@ -40,10 +40,9 @@ document.addEventListener('DOMContentLoaded', app.addMap);
  * @param {Object} jsonResponse JSON response object from Flickr.
  * @see app.getPhotoList
  */
-app.addPhotoMarkers = function(jsonResponse) {
-    var photos = jsonResponse.photos.photo;
-    for (var i = 0; i < photos.length; i++) {
-        app.getPhotoGeo(photos[i], function(photo) {
+app.addPhotoMarkers = function(photoList) {
+    for (var i = 0; i < photoList.length; i++) {
+        app.getPhotoGeo(photoList[i], function(photo) {
             photo.icon = 'icons/photo.png';
             app.addMapMarker(photo);
         });
