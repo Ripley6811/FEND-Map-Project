@@ -36,7 +36,7 @@ This is a map showing places around Nanzhi where I do different activities.
 - [Knockoutjs tutorial](http://learn.knockoutjs.com/#/?tutorial=intro)
 - [How to data-bind to image path with KnockoutJS](http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working)
 - [How to add scrollbar to div](http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css)
-
+- [How to style placeholder text in input field](http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/)
 
 
 

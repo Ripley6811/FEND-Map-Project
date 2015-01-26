@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Namespaces</title>
+	<title>Project #5 Source: foursquare.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,92 +56,57 @@
 	<div class="row-fluid">
 
 		
-		<div class="span8">
-			
+			<div class="span12">
+				
 				<div id="main">
 					
 
 
-	<h1 class="page-title">Namespaces</h1>
+		<h1 class="page-title">Source: foursquare.js</h1>
+    
 <section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">var app = app || {};
 
-<header>
-    <h2>
+/**
+ * Send a search request to Foursquare and process the response.
+ * @param {Number}   lat        Latitude of current map center.
+ * @param {Number}   lon        Longitude of current map center.
+ * @param {String}   searchTerm Search term entered by user.
+ * @param {Function} callback   Function to send the response to.
+ */
+app.getFoursquareResponse = function(lat, lon, searchTerm, callback) {
+    'use strict';
+    var xmlhttp = new XMLHttpRequest();
     
-    </h2>
+    // Set up callback
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            var json = JSON.parse(xmlhttp.response);
+            if (json.meta.code === 200) {
+                callback(json);
+            } else {
+                console.log("ERROR in app.getFoursquareResponse: " + json.message);
+            }
+        }
+    };
     
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-
-        
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Namespaces</h3>
-
-        <dl>
-            <dt><a href="namespaces.html#app"><a href="app.html">app</a></a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+    var requestString = [
+        'https://api.foursquare.com/v2/venues/explore',
+        '?client_id=P0APIITDRLPFDGL1ARPRCWMVV055QQOACFUWVNZDWLGLDSZB',
+        '&client_secret=SHHYNZZT1QTSR45SQQ1MRQV4FZKHKNYLGJ1LRZVT0HB5RFJU',
+        '&v=20130815',
+        '&ll=' + lat + ',' + lon,
+        '&radius=8000',
+        '&query=' + searchTerm
+        ].join('');
+    xmlhttp.open('GET', requestString, true);
+    xmlhttp.send();
+};</pre>
+	</article>
 </section>
+
 
 
 
@@ -165,10 +130,6 @@
 				</footer>
 			</div>
 
-			
-			<div class="span3">
-				<div id="toc"></div>
-			</div>
 			
 			<br clear="both">
 		</div>
