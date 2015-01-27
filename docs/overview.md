@@ -1,4 +1,4 @@
-This is a map showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
+This is a map web site showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
 
 Features:
 - **Clickable map markers** display images and short descriptions.

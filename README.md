@@ -10,7 +10,7 @@
 
 
 ## Overview
-This is a map showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
+This is a map web site showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
 
 Features:
 - **Clickable map markers** display images and short descriptions.
@@ -68,7 +68,7 @@ Build tools:
 
 ## Project First Steps
 ### Steps for setting up directory structure
->This is a log of how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
+>The folowing are notes on how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
 
 #### 1) Create package.json with `npm init`
 Defaults are provided in parenthesis.
