@@ -3,32 +3,55 @@
 > Frontend Nanodegree Project 5 - Neighborhood Map
 
 * [Overview](#overview)
-* [Options](#options)
+* [Links](#links)
 * [Resources](#resources)
 * [Project First Steps](#project-first-steps)
 * [License and Copyright](#license-and-copyright)
 
 
 ## Overview
-This is an overview of the map project.
+This is a map web site showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
+
+Features:
+- **Clickable map markers** display images and short descriptions.
+- **Flickr images** that link to a larger version on the Flickr web site.
+- **Google Street View images** displayed for non-Flickr locations.
+- **Foursquare search** box for finding other locations like a "coffee shop".
+- Clickable **list view of markers** that pan the map to a selected marker.
+- List view and map markers update during search using Knockout.js' `observableArray`.
+
+Build tools:
+- **Bootstrap** for css styling.
+- **KnockoutJS** for dynamically updating list of markers during search.
+- **Grunt** for creating minified *build* css and js files, and creating the README and JSDoc files.
+- **Brackets** editor.
 
 
-## Options
+## Links
+- [Live web site](http://ripley6811.github.io/frontend-nanodegree-map-project/)
+- [Git repository](https://github.com/Ripley6811/frontend-nanodegree-map-project/tree/gh-pages)
+- [Documentation](http://ripley6811.github.io/frontend-nanodegree-map-project/jsdoc/)
 
 
 ## Resources
 - [developers.google.com](https://developers.google.com)
     - [Adding a Google Map to your website]
     - [Creating custom map markers]
+    - [API reference: Map 'panTo' and other methods]
+    - [Legend box overlay example]
+    - [How to use "Info Windows"](https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple)
 - [mapicons.nicolasmollet.com](http://mapicons.nicolasmollet.com)
     - [Various sports icons]
-
-
-
-
-
-
-
+- [www.flickr.com](https://www.flickr.com)
+    - [Flickr API Methods]
+    - [Demonstration of flickr.people.getPublicPhotos request]
+    - [How to construct a photo source url](https://www.flickr.com/services/api/misc.urls.html)
+- [How to use the Flickr API](http://kylerush.net/blog/flickr-api/)
+- [Knockoutjs tutorial](http://learn.knockoutjs.com/#/?tutorial=intro)
+- [How to data-bind to image path with KnockoutJS](http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working)
+- [How to add scrollbar to div](http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css)
+- [How to style placeholder text in input field](http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/)
+- [Bootstrap Documentation](http://getbootstrap.com/components/)
 
 
 
@@ -36,14 +59,18 @@ This is an overview of the map project.
 
 [Adding a Google Map to your website]:https://developers.google.com/maps/tutorials/fundamentals/adding-a-google-map
 [Creating custom map markers]:https://developers.google.com/maps/tutorials/customizing/custom-markers
+[API reference: Map 'panTo' and other methods]:https://developers.google.com/maps/documentation/javascript/reference
 [Various sports icons]:http://mapicons.nicolasmollet.com/category/markers/sports/?style=dark
+[Demonstration of flickr.people.getPublicPhotos request]:https://www.flickr.com/services/api/explore/flickr.people.getPublicPhotos
+[Flickr API Methods]:https://www.flickr.com/services/api/
+[Legend box overlay example]:https://google-developers.appspot.com/maps/tutorials/customizing/js/legend
 
 
 ## Project First Steps
 ### Steps for setting up directory structure
->This is a log of how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
+>The following are notes on how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
 
-##### 1) Create package.json with `npm init`
+#### 1) Create package.json with `npm init`
 Defaults are provided in parenthesis.
 ```sh
 >npm init
@@ -58,7 +85,7 @@ author: Jay W Johnson
 license: (ISC) MIT
 ```
 
-##### 2) Install Grunt and plugins with `npm install <module> --save-dev`
+#### 2) Install Grunt and plugins with `npm install <module> --save-dev`
 
 ```sh
 >npm install grunt --save-dev
@@ -71,7 +98,7 @@ license: (ISC) MIT
 ```
 Note that **grunt-jsdoc** includes **ink-docstrap**.
 
-##### 3) Create `Gruntfile.js`
+#### 3) Create `Gruntfile.js`
 0. In **Brackets**, right click in directory tree and select **New File**
 0. Name the file **Gruntfile.js**
 3. Copy the basic uglify js code from the Grunt web site or from another project.
@@ -99,15 +126,15 @@ module.exports = function(grunt) {
 };
 ```
 
-#####4) Set up `README.tmpl.md`
-> README.tmpl.md is the template that grunt-readme uses to stitch together the final README.md file. This and all other README template files live in the **docs** directory.
+#### 4) Set up `README.tmpl.md`
+> **README.tmpl.md** is the template that **grunt-readme** uses to stitch together the final **README.md** file. This and all other README template files live in the **docs** directory.
 
 0. Create **docs** folder.
 0. Copy `BASIC.tmpl.md` or another template from **grunt-readme/templates** to the **docs** folder.
 1. Add/configure optional *.md files to include in final README.md
 
 
-#####5) Set up `grunt-watch`
+#### 5) Set up `grunt-watch`
 - Watch `*.js` files and run **grunt-contrib-uglify** and **grunt-jsdoc**.
 - Watch `*.md` files and run **grunt-readme** and **grunt-jsdoc**.
 
@@ -120,6 +147,13 @@ module.exports = function(grunt) {
                     spawn: false,
                 },
             },
+            css: {
+                files: ['src/*.css'],
+                tasks: ['cssmin'],
+                options: {
+                    spawn: false
+                }
+            },
             markdown: {
                 files: ['docs/*.md'],
                 tasks: ['readme','jsdoc'],
@@ -130,7 +164,7 @@ module.exports = function(grunt) {
         },
 ```
 
-#####6) HTML assets
+#### 6) HTML assets
 1. Placed `index.html` in the root directory.
 2. The **src** directory contains all the source css and js files. 
 3. The **build** directory contains minified css and js used by `index.html`

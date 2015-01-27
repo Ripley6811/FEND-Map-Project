@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>Project #5 Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,8 +18,36 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">DocStrap</a>
+			<a class="brand" href="index.html">Project #5</a>
 			<ul class="nav">
+				
+				<li class="dropdown">
+					<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="global.html#app">app</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="global.html#initialize">initialize</a>
+						</li>
+						
+
+					</ul>
+				</li>
 				
 			</ul>
 		</div>
@@ -64,32 +92,64 @@
 </blockquote>
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#options">Options</a></li>
+<li><a href="#links">Links</a></li>
 <li><a href="#resources">Resources</a></li>
 <li><a href="#project-first-steps">Project First Steps</a></li>
 <li><a href="#license-and-copyright">License and Copyright</a></li>
 </ul>
 <h2>Overview</h2>
-<p>This is an overview of the map project.</p>
-<h2>Options</h2>
+<p>This is a map web site showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.</p>
+<p>Features:
+- <strong>Clickable map markers</strong> display images and short descriptions.
+- <strong>Flickr images</strong> that link to a larger version on the Flickr web site.
+- <strong>Google Street View images</strong> displayed for non-Flickr locations.
+- <strong>Foursquare search</strong> box for finding other locations like a &quot;coffee shop&quot;.
+- Clickable <strong>list view of markers</strong> that pan the map to a selected marker.
+- List view and map markers update during search using Knockout.js' <code>observableArray</code>.</p>
+<p>Build tools:
+- <strong>Bootstrap</strong> for css styling.
+- <strong>KnockoutJS</strong> for dynamically updating list of markers during search.
+- <strong>Grunt</strong> for creating minified <em>build</em> css and js files, and creating the README and JSDoc files.
+- <strong>Brackets</strong> editor.</p>
+<h2>Links</h2>
+<ul>
+<li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/">Live web site</a></li>
+<li><a href="https://github.com/Ripley6811/frontend-nanodegree-map-project/tree/gh-pages">Git repository</a></li>
+<li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/jsdoc/">Documentation</a></li>
+</ul>
 <h2>Resources</h2>
 <ul>
 <li><a href="https://developers.google.com">developers.google.com</a><ul>
 <li><a href="https://developers.google.com/maps/tutorials/fundamentals/adding-a-google-map">Adding a Google Map to your website</a></li>
 <li><a href="https://developers.google.com/maps/tutorials/customizing/custom-markers">Creating custom map markers</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/reference">API reference: Map 'panTo' and other methods</a></li>
+<li><a href="https://google-developers.appspot.com/maps/tutorials/customizing/js/legend">Legend box overlay example</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple">How to use &quot;Info Windows&quot;</a></li>
 </ul>
 </li>
 <li><a href="http://mapicons.nicolasmollet.com">mapicons.nicolasmollet.com</a><ul>
 <li><a href="http://mapicons.nicolasmollet.com/category/markers/sports/?style=dark">Various sports icons</a></li>
 </ul>
 </li>
+<li><a href="https://www.flickr.com">www.flickr.com</a><ul>
+<li><a href="https://www.flickr.com/services/api/">Flickr API Methods</a></li>
+<li><a href="https://www.flickr.com/services/api/explore/flickr.people.getPublicPhotos">Demonstration of flickr.people.getPublicPhotos request</a></li>
+<li><a href="https://www.flickr.com/services/api/misc.urls.html">How to construct a photo source url</a></li>
+</ul>
+</li>
+<li><a href="http://kylerush.net/blog/flickr-api/">How to use the Flickr API</a></li>
+<li><a href="http://learn.knockoutjs.com/#/?tutorial=intro">Knockoutjs tutorial</a></li>
+<li><a href="http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working">How to data-bind to image path with KnockoutJS</a></li>
+<li><a href="http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css">How to add scrollbar to div</a></li>
+<li><a href="http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/">How to style placeholder text in input field</a></li>
+<li><a href="http://getbootstrap.com/components/">Bootstrap Documentation</a></li>
 </ul>
 <h2>Project First Steps</h2>
 <h3>Steps for setting up directory structure</h3>
 <blockquote>
-<p>This is a log of how I created the basic files and file structure. I used <strong>Git Shell</strong> for command prompt entries. File editing done in both <strong><a href="http://notepad-plus-plus.org/">Notepad++</a></strong> and <strong><a href="http://brackets.io/">Brackets</a></strong>.</p>
+<p>The following are notes on how I created the basic files and file structure. I used <strong>Git Shell</strong> for command prompt entries. File editing done in both <strong><a href="http://notepad-plus-plus.org/">Notepad++</a></strong> and <strong><a href="http://brackets.io/">Brackets</a></strong>.</p>
 </blockquote>
-<h5>1) Create package.json with <code>npm init</code></h5>
+<h4>1) Create package.json with <code>npm init</code></h4>
 <p>Defaults are provided in parenthesis.</p>
 <pre><code class="lang-sh">&gt;npm init
 name: (frontend-nanodegree-map-project)
@@ -101,7 +161,7 @@ git repository: https://github.com/Ripley6811/frontend-nanodegree-map-project.gi
 keywords:
 author: Jay W Johnson
 license: (ISC) MIT</code></pre>
-<h5>2) Install Grunt and plugins with <code>npm install &lt;module&gt; --save-dev</code></h5>
+<h4>2) Install Grunt and plugins with <code>npm install &lt;module&gt; --save-dev</code></h4>
 <pre><code class="lang-sh">&gt;npm install grunt --save-dev
 &gt;npm install grunt-contrib-uglify --save-dev
 &gt;npm install grunt-contrib-cssmin --save-dev
@@ -110,7 +170,7 @@ license: (ISC) MIT</code></pre>
 &gt;npm install grunt-jsdoc --save-dev
 &gt;# npm install ink-docstrap --save-dev</code></pre>
 <p>Note that <strong>grunt-jsdoc</strong> includes <strong>ink-docstrap</strong>.</p>
-<h5>3) Create <code>Gruntfile.js</code></h5>
+<h4>3) Create <code>Gruntfile.js</code></h4>
 <ol>
 <li>In <strong>Brackets</strong>, right click in directory tree and select <strong>New File</strong></li>
 <li>Name the file <strong>Gruntfile.js</strong></li>
@@ -136,16 +196,16 @@ license: (ISC) MIT</code></pre>
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
 };</code></pre>
-<h5>4) Set up <code>README.tmpl.md</code></h5>
+<h4>4) Set up <code>README.tmpl.md</code></h4>
 <blockquote>
-<p>README.tmpl.md is the template that grunt-readme uses to stitch together the final README.md file. This and all other README template files live in the <strong>docs</strong> directory.</p>
+<p><strong>README.tmpl.md</strong> is the template that <strong>grunt-readme</strong> uses to stitch together the final <strong>README.md</strong> file. This and all other README template files live in the <strong>docs</strong> directory.</p>
 </blockquote>
 <ol>
 <li>Create <strong>docs</strong> folder.</li>
 <li>Copy <code>BASIC.tmpl.md</code> or another template from <strong>grunt-readme/templates</strong> to the <strong>docs</strong> folder.</li>
 <li>Add/configure optional *.md files to include in final README.md</li>
 </ol>
-<h5>5) Set up <code>grunt-watch</code></h5>
+<h4>5) Set up <code>grunt-watch</code></h4>
 <ul>
 <li>Watch <code>*.js</code> files and run <strong>grunt-contrib-uglify</strong> and <strong>grunt-jsdoc</strong>.</li>
 <li>Watch <code>*.md</code> files and run <strong>grunt-readme</strong> and <strong>grunt-jsdoc</strong>.</li>
@@ -158,6 +218,13 @@ license: (ISC) MIT</code></pre>
                     spawn: false,
                 },
             },
+            css: {
+                files: ['src/*.css'],
+                tasks: ['cssmin'],
+                options: {
+                    spawn: false
+                }
+            },
             markdown: {
                 files: ['docs/*.md'],
                 tasks: ['readme','jsdoc'],
@@ -166,7 +233,7 @@ license: (ISC) MIT</code></pre>
                 },
             }
         },</code></pre>
-<h5>6) HTML assets</h5>
+<h4>6) HTML assets</h4>
 <ol>
 <li>Placed <code>index.html</code> in the root directory.</li>
 <li>The <strong>src</strong> directory contains all the source css and js files. </li>
@@ -196,7 +263,7 @@ Released under the MIT license</p></article>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Tue Jan 13th 2015 using the <a
+		on Tue Jan 27th 2015 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
