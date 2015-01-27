@@ -1,5 +1,5 @@
 ## Steps for setting up directory structure
->The folowing are notes on how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
+>The following are notes on how I created the basic files and file structure. I used **Git Shell** for command prompt entries. File editing done in both **[Notepad++]** and **[Brackets]**.
 
 ### 1) Create package.json with `npm init`
 Defaults are provided in parenthesis.
