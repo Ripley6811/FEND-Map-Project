@@ -333,7 +333,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-211">line 211</a>
+				 <a href="app.js.html#sunlight-1-line-214">line 214</a>
 			</li>
 		</ul>
 	</dd>
@@ -458,7 +458,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-237">line 237</a>
+				 <a href="app.js.html#sunlight-1-line-240">line 240</a>
 			</li>
 		</ul>
 	</dd>
@@ -534,7 +534,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-198">line 198</a>
+				 <a href="app.js.html#sunlight-1-line-201">line 201</a>
 			</li>
 		</ul>
 	</dd>
@@ -661,7 +661,7 @@ a callback for <code>app.getPhotoList</code>.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-224">line 224</a>
+				 <a href="app.js.html#sunlight-1-line-227">line 227</a>
 			</li>
 		</ul>
 	</dd>
@@ -1175,6 +1175,132 @@ the photo list to the callback.</p>
         
             
 <dt>
+    <h4 class="name" id="processFoursquareResponse"><span class="type-signature">&lt;static> </span>processFoursquareResponse<span class="signature">(json)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>This is the callback function used in the async JSON for processing locations
+in a Foursquare 'explore' response.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>json</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Foursquare API response JSON object.</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="app.js.html">app.js</a>,
+				 <a href="app.js.html#sunlight-1-line-132">line 132</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="showInfoWindow"><span class="type-signature">&lt;static> </span>showInfoWindow<span class="signature">(feature)</span><span class="type-signature"></span></h4>
     
     
@@ -1270,7 +1396,7 @@ the photo list to the callback.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-156">line 156</a>
+				 <a href="app.js.html#sunlight-1-line-159">line 159</a>
 			</li>
 		</ul>
 	</dd>

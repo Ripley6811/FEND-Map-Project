@@ -94,8 +94,8 @@ function initialize() {
     
     // app.map.panTo(LatLng) 
 }
-//document.addEventListener('DOMContentLoaded', initialize);
 // Why does the google maps listener load the map faster?
+//document.addEventListener('DOMContentLoaded', initialize);
 google.maps.event.addDomListener(window, 'load', initialize);
 
 /**
@@ -124,7 +124,11 @@ app.viewModel = new (function() {
     };
 })();
 
-
+/**
+ * This is the callback function used in the async JSON for processing locations
+ * in a Foursquare 'explore' response.
+ * @param {Object} json Foursquare API response JSON object.
+ */
 app.processFoursquareResponse = function(json) {
     // Delete previous search results markers
     for (var i = app.viewModel.features().length - 1; i >= 0; i = i-1) {
@@ -145,7 +149,6 @@ app.processFoursquareResponse = function(json) {
             },
         };
         app.addMapMarker(feature, 0);
-
     }
 };
 

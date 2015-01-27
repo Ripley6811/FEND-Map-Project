@@ -98,12 +98,19 @@
 <li><a href="#license-and-copyright">License and Copyright</a></li>
 </ul>
 <h2>Overview</h2>
-<p>This is a map showing places that I like to go to and my photography (with location data) from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.</p>
+<p>This is a map showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.</p>
 <p>Features:
-- Clickable map markers that display an image and short description.
-- Click on Flickr images to see a larger version on the Flickr web site.
-- Lower right-hand search box and list that responds to browser resizing.
-- Type &quot;coffee&quot; or other terms in the Foursquare search box to browse other locations in the current viewable area.</p>
+- <strong>Clickable map markers</strong> display images and short descriptions.
+- <strong>Flickr images</strong> that link to a larger version on the Flickr web site.
+- <strong>Google Street View images</strong> displayed for non-Flickr locations.
+- <strong>Foursquare search</strong> box for finding other locations like a &quot;coffee shop&quot;.
+- Clickable <strong>list view of markers</strong> that pan the map to a selected marker.
+- List view and map markers update during search using Knockout.js' <code>observableArray</code>.</p>
+<p>Build tools:
+- <strong>Bootstrap</strong> for css styling.
+- <strong>KnockoutJS</strong> for dynamically updating list of markers during search.
+- <strong>Grunt</strong> for creating minified <em>build</em> css and js files, and creating the README and JSDoc files.
+- <strong>Brackets</strong> editor.</p>
 <h2>Links</h2>
 <ul>
 <li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/">Live web site</a></li>
