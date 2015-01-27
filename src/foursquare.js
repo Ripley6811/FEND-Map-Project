@@ -1,3 +1,7 @@
+/**
+ * This file manages Foursquare API requests.
+ */
+
 var app = app || {};
 
 /**

@@ -3,6 +3,7 @@
  * @namespace app
  */
 var app = app || {};
+// Default map center; Nanzhi, Taiwan.
 app.center = new google.maps.LatLng(22.735281, 120.353368)
 
 /**
@@ -22,14 +23,15 @@ function initialize() {
     
     // Add interactive div in lower right for search and selection.
     var legendDiv = document.createElement('div');
-    legendDiv.id = 'legend';  // Delete this?
-    legendDiv.style.height = '500px';
-    legendDiv.style.backgroundColor = 'white';
-    legendDiv.style.padding = '12px';
-    legendDiv.style.margin = '16px';
+    legendDiv.style.position = 'absolute';
+    legendDiv.style.overflow = 'hidden';
+    legendDiv.style.maxHeight = '90%';
+    legendDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+    legendDiv.style.padding = '10px';
+    legendDiv.style.fontWeight = '700';
+    legendDiv.style.margin = '10px';
     legendDiv.innerHTML = 'Explore With FOURSQUARE!';
     document.querySelector('body').appendChild(legendDiv);
-    
     app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
     
     // Add markers from the list in features.js.
@@ -38,12 +40,12 @@ function initialize() {
     // Add photos that have coordinates from my Flickr account.
     app.getPhotoList(app.addPhotoMarkers);
     
-    // Add search bar functionality.
+    // Add Foursquare search bar to legend div.
     var entryDiv = document.createElement('div');
     entryDiv.innerHTML = '<input placeholder="FOURSQUARE" data-bind="value: searchPhrase">';
     legendDiv.appendChild(entryDiv);
     
-    // Add color legend above list.
+    // Add icon color legend above list.
     var colorLegendDiv = document.createElement('div');
     colorLegendDiv.style.padding = '10px';
     colorLegendDiv.innerHTML = [
@@ -51,7 +53,7 @@ function initialize() {
         '<tbody>',
         '<tr>',
         '<td><img src="icons/blue_blank.png" width="20"></td>',
-        '<td colspan="5">FOURSQUARE Results</td>',
+        '<td colspan="5">Foursquare Search Results</td>',
         '</tr>',
         '<tr>',
         '<td><img src="icons/orange_blank.png" width="20"></td>',
@@ -66,10 +68,17 @@ function initialize() {
     legendDiv.appendChild(colorLegendDiv);
     
     // Add clickable feature list
+    var listDetails = document.createElement('details');
+    listDetails.innerHTML = '<summary>Hide/Show Marker List</summary>';
+    listDetails.style.position = 'relative';
+    listDetails.style.maxHeight = '100%';
+    listDetails.open = true;
+    legendDiv.appendChild(listDetails);
+    
     var listDiv = document.createElement('div');
-//    listDiv.style.maxHeight = '300px';
-    listDiv.style.height = '360px';
+    listDiv.style.position = 'relative';
     listDiv.style.overflow = 'auto';
+    listDiv.style.height = '400px';
     listDiv.innerHTML = [
         '<table>',
         '<tbody data-bind="foreach: features">',
@@ -80,7 +89,7 @@ function initialize() {
         '</tbody>',
         '</table>'
     ].join('');
-    legendDiv.appendChild(listDiv);
+    listDetails.appendChild(listDiv);
     ko.applyBindings(app.viewModel);
     
     // app.map.panTo(LatLng) 
@@ -98,14 +107,13 @@ app.viewModel = new (function() {
     this.searchPhrase = ko.observable('');
     
     this.searchPhrase.subscribe(function(newTerm) {
-        if (app.map != undefined) {
-            var latlon = app.map.getCenter();
-            app.getFoursquareResponse(
-                latlon.k, latlon.D, 
-                newTerm, 
-                app.processFoursquareResponse
-            );
-        }
+        if (newTerm == '') return;
+        var latlon = app.map.getCenter();
+        app.getFoursquareResponse(
+            latlon.k, latlon.D, 
+            newTerm, 
+            app.processFoursquareResponse
+        );
     });
     
     this.features = ko.observableArray();
@@ -143,21 +151,28 @@ app.processFoursquareResponse = function(json) {
 
 /**
  * Opens an info window above a feature marker.
- * @param {Object} feature An object containing a marker.
+ * @param {Object} feature An object containing a google marker and other info.
  */
 app.showInfoWindow = function(feature) {
     var imgDiv = '';
     // Add Flickr image link if it is an image feature.
     // If not an image feature than attempt StreetView image.
     if (feature.farm) {
-        imgDiv = '<img src="https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg" alt="{title}"><br>';
+        // Add a Flickr image and link
+        imgDiv = [
+            '<a href="https://www.flickr.com/photos/{user-id}/{id}">',
+            '<img src="https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg" alt="{title}"></a>'
+        ].join('')
+        imgDiv = imgDiv.replace('{user-id}', app.user_id);
         imgDiv = imgDiv.replace('{farm-id}', feature.farm);
         imgDiv = imgDiv.replace('{server-id}', feature.server);
+        imgDiv = imgDiv.replace('{id}', feature.id);
         imgDiv = imgDiv.replace('{id}', feature.id);
         imgDiv = imgDiv.replace('{secret}', feature.secret);
         imgDiv = imgDiv.replace('[mstzb]', 'n');
         imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
     } else {
+        // Attach a street view image.
         imgDiv = '<img src="http://maps.googleapis.com/maps/api/streetview?size={size}&location={location}" alt="{title}"><br>';
         imgDiv = imgDiv.replace('{size}', '320x200');
         var p = feature.position;
@@ -167,8 +182,12 @@ app.showInfoWindow = function(feature) {
     // Keep reference to open infoWindow for closing and replacing.
     if (app.infoWindow) app.infoWindow.close();
     app.infoWindow = new google.maps.InfoWindow({
-        content: '<div style="text-align: center">' + imgDiv + 
-                 feature.title.replace(/"/g, '&quot;') + '</div>'
+        content: [
+            '<div style="text-align: center">',
+            imgDiv,
+            '<br>',
+            feature.title.replace(/"/g, '&quot;'),
+            '</div>'].join('')
     });
     app.infoWindow.open(app.map, feature.marker);
 };

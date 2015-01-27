@@ -28,7 +28,7 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="app.html">app</a>
+							<a href="global.html#app">app</a>
 						</li>
 						
 
@@ -199,7 +199,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="features.js.html">features.js</a>,
-				 <a href="features.js.html#sunlight-1-line-12">line 12</a>
+				 <a href="features.js.html#sunlight-1-line-17">line 17</a>
 			</li>
 		</ul>
 	</dd>
@@ -261,7 +261,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-100">line 100</a>
+				 <a href="app.js.html#sunlight-1-line-105">line 105</a>
 			</li>
 		</ul>
 	</dd>
@@ -333,7 +333,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-207">line 207</a>
+				 <a href="app.js.html#sunlight-1-line-211">line 211</a>
 			</li>
 		</ul>
 	</dd>
@@ -458,7 +458,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-233">line 233</a>
+				 <a href="app.js.html#sunlight-1-line-237">line 237</a>
 			</li>
 		</ul>
 	</dd>
@@ -534,7 +534,7 @@ interactive div.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-194">line 194</a>
+				 <a href="app.js.html#sunlight-1-line-198">line 198</a>
 			</li>
 		</ul>
 	</dd>
@@ -661,7 +661,7 @@ a callback for <code>app.getPhotoList</code>.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-220">line 220</a>
+				 <a href="app.js.html#sunlight-1-line-224">line 224</a>
 			</li>
 		</ul>
 	</dd>
@@ -673,7 +673,7 @@ a callback for <code>app.getPhotoList</code>.</p>
 	<dt class="tag-see">See:</dt>
 	<dd class="tag-see">
 		<ul>
-			<li><a href="app.html#getPhotoList">app.getPhotoList</a></li>
+			<li><a href="global.html#app#getPhotoList">app.getPhotoList</a></li>
 			</ul>
 	</dd>
 	
@@ -862,7 +862,7 @@ a callback for <code>app.getPhotoList</code>.</p>
 		<ul class="dummy">
 			<li>
 				<a href="foursquare.js.html">foursquare.js</a>,
-				 <a href="foursquare.js.html#sunlight-1-line-10">line 10</a>
+				 <a href="foursquare.js.html#sunlight-1-line-14">line 14</a>
 			</li>
 		</ul>
 	</dd>
@@ -1012,7 +1012,7 @@ exists. Called by <code>app.addPhotoMarkers</code>.</p>
 		<ul class="dummy">
 			<li>
 				<a href="photos.js.html">photos.js</a>,
-				 <a href="photos.js.html#sunlight-1-line-45">line 45</a>
+				 <a href="photos.js.html#sunlight-1-line-48">line 48</a>
 			</li>
 		</ul>
 	</dd>
@@ -1024,7 +1024,7 @@ exists. Called by <code>app.addPhotoMarkers</code>.</p>
 	<dt class="tag-see">See:</dt>
 	<dd class="tag-see">
 		<ul>
-			<li><a href="app.html#addPhotoMarkers">app.addPhotoMarkers</a></li>
+			<li><a href="global.html#app#addPhotoMarkers">app.addPhotoMarkers</a></li>
 			</ul>
 	</dd>
 	
@@ -1145,7 +1145,7 @@ the photo list to the callback.</p>
 		<ul class="dummy">
 			<li>
 				<a href="photos.js.html">photos.js</a>,
-				 <a href="photos.js.html#sunlight-1-line-11">line 11</a>
+				 <a href="photos.js.html#sunlight-1-line-14">line 14</a>
 			</li>
 		</ul>
 	</dd>
@@ -1270,7 +1270,7 @@ the photo list to the callback.</p>
 		<ul class="dummy">
 			<li>
 				<a href="app.js.html">app.js</a>,
-				 <a href="app.js.html#sunlight-1-line-152">line 152</a>
+				 <a href="app.js.html#sunlight-1-line-156">line 156</a>
 			</li>
 		</ul>
 	</dd>

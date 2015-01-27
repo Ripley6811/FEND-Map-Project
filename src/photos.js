@@ -1,5 +1,10 @@
+/**
+ * This file manages Flickr requests.
+ */
 
 var app = app || {};
+
+app.user_id = '91602303%40N03';
 
 /**
  * Request a list of my photos from Flickr. Parses the response and passes
@@ -23,7 +28,7 @@ app.getPhotoList = function(callback) {
     var requestParams = [
         'method=flickr.people.getPublicPhotos',
         'api_key=e224e71bda1508efe89de86b3b30ed9f',
-        'user_id=91602303%40N03',
+        'user_id=' + app.user_id,
         'per_page=500',
         'format=json',
         'nojsoncallback=1'

@@ -10,7 +10,13 @@
 
 
 ## Overview
-This is a map showing places around Nanzhi where I do different activities.
+This is a map showing places that I like to go to and my photography (with location data) from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.
+
+Features:
+- Clickable map markers that display an image and short description.
+- Click on Flickr images to see a larger version on the Flickr web site.
+- Lower right-hand search box and list that responds to browser resizing.
+- Type "coffee" or other terms in the Foursquare search box to browse other locations in the current viewable area.
 
 
 ## Links
@@ -37,7 +43,7 @@ This is a map showing places around Nanzhi where I do different activities.
 - [How to data-bind to image path with KnockoutJS](http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working)
 - [How to add scrollbar to div](http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css)
 - [How to style placeholder text in input field](http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/)
-
+- [Bootstrap Documentation](http://getbootstrap.com/components/)
 
 
 

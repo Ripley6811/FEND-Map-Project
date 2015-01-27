@@ -1,3 +1,8 @@
+/**
+ * This file contains a list of activity locations that I want to include on 
+ * the map.
+ */
+
 var app = app || {};
 
 /**
