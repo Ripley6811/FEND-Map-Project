@@ -91,7 +91,7 @@ app.toFlickrDiv = function(feature) {
     imgDiv = imgDiv.replace('{id}', feature.id);
     imgDiv = imgDiv.replace('{id}', feature.id);
     imgDiv = imgDiv.replace('{secret}', feature.secret);
-    imgDiv = imgDiv.replace('[mstzb]', 'n');
+    imgDiv = imgDiv.replace('[mstzb]', app.width < 600 ? 'q' : 'n');
     imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
     return imgDiv;
 };

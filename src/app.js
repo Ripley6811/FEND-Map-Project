@@ -60,7 +60,8 @@ app.viewModel = new (function() {
     // Window size and change detection.
     self.win_width = ko.observable(window.innerWidth);
     self.mobileView = ko.computed(function() {
-       return self.win_width() < 992; 
+        console.log(self.win_width());
+        return self.win_width() < 992; 
     });
     
     self.searchPhrase.subscribe(function(newTerm) {
@@ -82,8 +83,10 @@ app.viewModel = new (function() {
         app.showInfoWindow(feature);
     };
 })();
+app.width = window.innerWidth;
 window.onresize = function() {
     app.viewModel.win_width(window.innerWidth);
+    app.width = window.innerWidth;
 }
 
 /**
@@ -132,7 +135,7 @@ app.showInfoWindow = function(feature) {
     } else {
         // Attach a street view image if not a Flickr feature.
         imgDiv = '<img src="http://maps.googleapis.com/maps/api/streetview?size={size}&location={location}" alt="{title}"><br>';
-        imgDiv = imgDiv.replace('{size}', '320x200');
+        imgDiv = imgDiv.replace('{size}', app.width < 600 ? '150x120' : '320x200');
         var p = feature.position;
         imgDiv = imgDiv.replace('{location}', [p.lat, p.lon].join(','));
         imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
