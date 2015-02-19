@@ -220,6 +220,12 @@ app.showInfoWindow = function(feature) {
             '&lt;/div>'].join('')
     });
     app.infoWindow.open(app.map, feature.marker);
+    
+        if (app.currentMarker != null) {
+            app.currentMarker.setAnimation(null);
+        }
+        feature.marker.setAnimation(google.maps.Animation.BOUNCE);
+        app.currentMarker = feature.marker;
 };
 
 /**
@@ -266,6 +272,7 @@ app.addPhotoMarkers = function(photoList) {
  * Add a marker to the map.
  * @param {Object} feature Contains title, position, and icon for marker.
  */
+app.currentMarker = null;
 app.addMapMarker = function(feature, index) {
     // Add google maps marker to feature object.
     var p = feature.position;
