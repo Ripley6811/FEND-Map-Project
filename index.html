@@ -22,6 +22,52 @@
     
     
 <body>
+    <div id="map-canvas"></div>
+    <div id="swipe-bar" class="hidden-md hidden-lg" data-bind="click: toggleSidebar">
+        <div id="swipe-bar-text" class="text-uppercase">
+            <strong>Feature List and Search</strong>
+        </div>
+    </div>
+    <div id="sidebar" class="container-fluid" 
+         data-bind="css: {peeking: !mobileView() && !sidebarVisible(), 
+                    shy: mobileView() && !sidebarVisible(), 
+                    showsidebar: sidebarVisible()},
+                    event: {mouseover: sidebarVisible, mouseout: sidebarVisible(false)}">
+        <div class="row-fluid text-center">
+            Explore With FOURSQUARE!
+            <input placeholder="FOURSQUARE" data-bind="value: searchPhrase">
+        </div>
+        <div id="legend" class="row-fluid">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><img src="icons/blue_blank.png" width="20"></td>
+                        <td colspan="5">Foursquare Search Results</td>
+                    </tr>
+                    <tr>
+                        <td><img src="icons/orange_blank.png" width="20"></td>
+                        <td>Jay's Activities</td>
+                        <td width="25"></td>  
+                        <td><img src="icons/purple_blank.png" width="20"></td>
+                        <td>Jay's Photos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div id="feature-list" class="row-fluid">
+            <table>
+                <tbody data-bind="foreach: features">
+                    <tr data-bind="click: $root.panTo">
+                        <td>
+                            <img alt="feature icon" data-bind="attr: {src: icon}" />
+                        </td>
+                        <td data-bind="text: title"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src="build/app.min.js"></script>
 </body>
     

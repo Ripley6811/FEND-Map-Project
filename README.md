@@ -20,6 +20,12 @@ Features:
 - Clickable **list view of markers** that pan the map to a selected marker.
 - List view and map markers update during search using Knockout.js' `observableArray`.
 
+`src` Files:
+- **app.js** - Main program.
+- **features.js** - Contains an array of pre-defined favorite locations for display.
+- **foursquare.js** - Ajax-related methods for communicating with Foursquare.
+- **flickr.js** - Ajax-related methods for communicating with Flickr.
+
 Build tools:
 - **Bootstrap** for css styling.
 - **KnockoutJS** for dynamically updating list of markers during search.

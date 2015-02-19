@@ -6,33 +6,19 @@ var app = app || {};
 // Default map center; Nanzhi, Taiwan.
 app.center = new google.maps.LatLng(22.735281, 120.353368)
 
+
 /**
- * Create and add DOM elements and run code for filling elements.
+ * Set up and run code for filling elements.
  */
 function initialize() {
     'use strict';
-    // Create, configure and append a map div.
-    var mapDiv = document.createElement('div');
-    mapDiv.id = 'map-canvas';  // Delete this?
-    mapDiv.style.backgroundColor = 'gold';
-    mapDiv.style.width = '100%';
-    mapDiv.style.minHeight = '100%';
-    document.querySelector('body').appendChild(mapDiv);
     
-    app.addMapToDiv(mapDiv);
+    // Create, configure and append a map div.
+    app.map = app.getGoogleMap(document.getElementById('map-canvas'));
     
     // Add interactive div in lower right for search and selection.
-    var legendDiv = document.createElement('div');
-    legendDiv.style.position = 'absolute';
-    legendDiv.style.overflow = 'hidden';
-    legendDiv.style.maxHeight = '90%';
-    legendDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-    legendDiv.style.padding = '10px';
-    legendDiv.style.fontWeight = '700';
-    legendDiv.style.margin = '10px';
-    legendDiv.innerHTML = 'Explore With FOURSQUARE!';
-    document.querySelector('body').appendChild(legendDiv);
-    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
+    var legendDiv = document.getElementById('sidebar');
+//    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
     
     // Add markers from the list in features.js.
     app.addFeaturesToMap();
@@ -40,59 +26,8 @@ function initialize() {
     // Add photos that have coordinates from my Flickr account.
     app.getPhotoList(app.addPhotoMarkers);
     
-    // Add Foursquare search bar to legend div.
-    var entryDiv = document.createElement('div');
-    entryDiv.innerHTML = '<input placeholder="FOURSQUARE" data-bind="value: searchPhrase">';
-    legendDiv.appendChild(entryDiv);
-    
-    // Add icon color legend above list.
-    var colorLegendDiv = document.createElement('div');
-    colorLegendDiv.style.padding = '10px';
-    colorLegendDiv.innerHTML = [
-        '<table>',
-        '<tbody>',
-        '<tr>',
-        '<td><img src="icons/blue_blank.png" width="20"></td>',
-        '<td colspan="5">Foursquare Search Results</td>',
-        '</tr>',
-        '<tr>',
-        '<td><img src="icons/orange_blank.png" width="20"></td>',
-        '<td>Jay\'s Activities</td>',
-        '<td width="25"></td>',
-        '<td><img src="icons/purple_blank.png" width="20"></td>',
-        '<td>Jay\'s Photos</td>',
-        '</tr>',
-        '</tbody>',
-        '</table>'
-    ].join('');
-    legendDiv.appendChild(colorLegendDiv);
-    
-    // Add clickable feature list
-    var listDetails = document.createElement('details');
-    listDetails.innerHTML = '<summary>Hide/Show Marker List</summary>';
-    listDetails.style.position = 'relative';
-    listDetails.style.maxHeight = '100%';
-    listDetails.open = true;
-    legendDiv.appendChild(listDetails);
-    
-    var listDiv = document.createElement('div');
-    listDiv.style.position = 'relative';
-    listDiv.style.overflow = 'auto';
-    listDiv.style.height = '400px';
-    listDiv.innerHTML = [
-        '<table>',
-        '<tbody data-bind="foreach: features">',
-        '<tr data-bind="click: $root.panTo">',
-        '<td><img alt="feature icon" data-bind="attr: {src: icon}" /></td>',
-        '<td data-bind="text: title"></td>',
-        '</tr>',
-        '</tbody>',
-        '</table>'
-    ].join('');
-    listDetails.appendChild(listDiv);
+    // Apply KnockoutJS model binding.
     ko.applyBindings(app.viewModel);
-    
-    // app.map.panTo(LatLng) 
 }
 // Why does the google maps listener load the map faster?
 //document.addEventListener('DOMContentLoaded', initialize);
@@ -103,10 +38,32 @@ google.maps.event.addDomListener(window, 'load', initialize);
  * interactive div.
  */
 app.viewModel = new (function() {
+    var self = this;
     // Variable for retrieving text field entry
-    this.searchPhrase = ko.observable('');
+    self.searchPhrase = ko.observable('');
     
-    this.searchPhrase.subscribe(function(newTerm) {
+    self.sidebarVisible = ko.observable(false);
+    
+    self.toggleSidebar = function() {
+        self.sidebarVisible(!self.sidebarVisible());
+    };
+    
+    ko.computed(function() {
+        var sidebar = document.getElementById('swipe-bar');
+        if (self.sidebarVisible()) {
+            sidebar.style.right = '220px';
+        } else { 
+            sidebar.style.right = '0px';
+        }
+    });
+    
+    // Window size and change detection.
+    self.win_width = ko.observable(window.innerWidth);
+    self.mobileView = ko.computed(function() {
+       return self.win_width() < 992; 
+    });
+    
+    self.searchPhrase.subscribe(function(newTerm) {
         if (newTerm == '') return;
         var latlon = app.map.getCenter();
         app.getFoursquareResponse(
@@ -116,13 +73,18 @@ app.viewModel = new (function() {
         );
     });
     
-    this.features = ko.observableArray();
+    self.features = ko.observableArray();
     
-    this.panTo = function(feature) {
+    self.panTo = function(feature) {
+        document.getElementById("map-canvas").focus();
+        if (self.mobileView()) self.sidebarVisible(false);
         app.map.panTo(feature.marker.getPosition());
         app.showInfoWindow(feature);
     };
 })();
+window.onresize = function() {
+    app.viewModel.win_width(window.innerWidth);
+}
 
 /**
  * This is the callback function used in the async JSON for processing locations
@@ -137,8 +99,12 @@ app.processFoursquareResponse = function(json) {
             app.viewModel.features.splice(i, 1);
         }
     }
-
+    // Add new search results.
     var items = json.response.groups['0'].items;
+    if (items.length == 0) {
+        alert('No results found for "' + app.viewModel.searchPhrase() + '"');
+        return;
+    }
     for (var i = 0; i < items.length; i = i+1) {
         var feature = {
             title: items[i].venue.name,
@@ -162,20 +128,9 @@ app.showInfoWindow = function(feature) {
     // If not an image feature than attempt StreetView image.
     if (feature.farm) {
         // Add a Flickr image and link
-        imgDiv = [
-            '<a href="https://www.flickr.com/photos/{user-id}/{id}">',
-            '<img src="https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg" alt="{title}"></a>'
-        ].join('')
-        imgDiv = imgDiv.replace('{user-id}', app.user_id);
-        imgDiv = imgDiv.replace('{farm-id}', feature.farm);
-        imgDiv = imgDiv.replace('{server-id}', feature.server);
-        imgDiv = imgDiv.replace('{id}', feature.id);
-        imgDiv = imgDiv.replace('{id}', feature.id);
-        imgDiv = imgDiv.replace('{secret}', feature.secret);
-        imgDiv = imgDiv.replace('[mstzb]', 'n');
-        imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
+        imgDiv = app.toFlickrDiv(feature);
     } else {
-        // Attach a street view image.
+        // Attach a street view image if not a Flickr feature.
         imgDiv = '<img src="http://maps.googleapis.com/maps/api/streetview?size={size}&location={location}" alt="{title}"><br>';
         imgDiv = imgDiv.replace('{size}', '320x200');
         var p = feature.position;
@@ -196,16 +151,18 @@ app.showInfoWindow = function(feature) {
 };
 
 /**
- * Add a google map to the map div element.
+ * Add a google map to the div element and returns reference to map.
+ * @param   {Object} mapDiv HTML element to place map inside.
+ * @returns {Object} The google map object.
  */
-app.addMapToDiv = function(mapDiv) {
+app.getGoogleMap = function(mapDiv) {
     // Configure and add map to map div.
     var mapOptions = {
         center: app.center,
         zoom: 14, // 0 to 22
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    app.map = new google.maps.Map(mapDiv, mapOptions);
+    return new google.maps.Map(mapDiv, mapOptions);
 };
 
 /**

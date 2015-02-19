@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Source: photos.js</title>
+	<title>Project #5 Source: flickr.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -62,7 +62,7 @@
 					
 
 
-		<h1 class="page-title">Source: photos.js</h1>
+		<h1 class="page-title">Source: flickr.js</h1>
     
 <section>
 	<article>
@@ -142,6 +142,11 @@ app.getPhotoGeo = function(photo, callback) {
     
 };
 
+/**
+ * Create an html Flickr image link from feature object.
+ * @param   {Object} feature Contains information about a map location.
+ * @returns {String} IMG tag wrapped in a link to photo on Flickr.com.
+ */
 app.toFlickrDiv = function(feature) {
     // Add a Flickr image and link
     imgDiv = [
