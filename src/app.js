@@ -43,6 +43,8 @@ app.viewModel = new (function() {
     self.searchPhrase = ko.observable('');
     
     self.sidebarVisible = ko.observable(false);
+    self.sidebarSetVisible = function() { self.sidebarVisible(true) };
+    self.sidebarSetInvisible = function() { self.sidebarVisible(false) };
     
     self.toggleSidebar = function() {
         self.sidebarVisible(!self.sidebarVisible());
@@ -59,9 +61,13 @@ app.viewModel = new (function() {
     
     // Window size and change detection.
     self.win_width = ko.observable(window.innerWidth);
+    self.win_height = ko.observable(window.innerHeight);
     self.mobileView = ko.computed(function() {
-        console.log(self.win_width());
         return self.win_width() < 992; 
+    });
+    ko.computed(function() {
+        document.getElementById('feature-list')
+            .style.height = [self.win_height() - 150, 'px'].join('');
     });
     
     self.searchPhrase.subscribe(function(newTerm) {
@@ -80,13 +86,17 @@ app.viewModel = new (function() {
         document.getElementById("map-canvas").focus();
         if (self.mobileView()) self.sidebarVisible(false);
         app.map.panTo(feature.marker.getPosition());
+        app.map.panBy(0,-120); // Shift map down a little for image.
         app.showInfoWindow(feature);
     };
 })();
 app.width = window.innerWidth;
+app.height = window.innerHeight;
 window.onresize = function() {
     app.viewModel.win_width(window.innerWidth);
+    app.viewModel.win_height(window.innerHeight);
     app.width = window.innerWidth;
+    app.height = window.innerHeight;
 }
 
 /**

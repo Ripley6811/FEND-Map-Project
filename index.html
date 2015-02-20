@@ -32,7 +32,7 @@
          data-bind="css: {peeking: !mobileView() && !sidebarVisible(), 
                     shy: mobileView() && !sidebarVisible(), 
                     showsidebar: sidebarVisible()},
-                    event: {mouseover: sidebarVisible, mouseout: sidebarVisible(false)}">
+                    event: {mouseover: sidebarSetVisible, mouseout: sidebarSetInvisible}">
         <div class="row-fluid text-center">
             Explore With FOURSQUARE!
             <input placeholder="FOURSQUARE" data-bind="value: searchPhrase">

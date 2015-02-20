@@ -103,12 +103,11 @@ div {
 }
 
 #legend {
-    height: 20%;
+    height: 70px;
     padding: 10px;
 }
 
 #feature-list {
-    max-height: 70%;
     overflow-y: scroll;
 }
 
