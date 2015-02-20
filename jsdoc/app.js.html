@@ -81,20 +81,12 @@ app.center = new google.maps.LatLng(22.735281, 120.353368)
  */
 function initialize() {
     'use strict';
-    
     // Create, configure and append a map div.
     app.map = app.getGoogleMap(document.getElementById('map-canvas'));
-    
-    // Add interactive div in lower right for search and selection.
-    var legendDiv = document.getElementById('sidebar');
-//    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendDiv);
-    
     // Add markers from the list in features.js.
     app.addFeaturesToMap();
-    
     // Add photos that have coordinates from my Flickr account.
     app.getPhotoList(app.addPhotoMarkers);
-    
     // Apply KnockoutJS model binding.
     ko.applyBindings(app.viewModel);
 }
@@ -110,15 +102,14 @@ app.viewModel = new (function() {
     var self = this;
     // Variable for retrieving text field entry
     self.searchPhrase = ko.observable('');
-    
+    // Observable and functions for controlling side panel position.
     self.sidebarVisible = ko.observable(false);
     self.sidebarSetVisible = function() { self.sidebarVisible(true) };
     self.sidebarSetInvisible = function() { self.sidebarVisible(false) };
-    
     self.toggleSidebar = function() {
         self.sidebarVisible(!self.sidebarVisible());
     };
-    
+    // Register a listener for sidebar visibility changes.
     ko.computed(function() {
         var sidebar = document.getElementById('swipe-bar');
         if (self.sidebarVisible()) {
@@ -127,18 +118,19 @@ app.viewModel = new (function() {
             sidebar.style.right = '0px';
         }
     });
-    
     // Window size and change detection.
     self.win_width = ko.observable(window.innerWidth);
     self.win_height = ko.observable(window.innerHeight);
+    // Boolean for switching to/from mobile (small) view.
     self.mobileView = ko.computed(function() {
         return self.win_width() &lt; 992; 
     });
+    // Register a listening to change height of panel list on resize.
     ko.computed(function() {
         document.getElementById('feature-list')
             .style.height = [self.win_height() - 150, 'px'].join('');
     });
-    
+    // Register a listener for search phrase changes.
     self.searchPhrase.subscribe(function(newTerm) {
         if (newTerm == '') return;
         var latlon = app.map.getCenter();
@@ -148,9 +140,11 @@ app.viewModel = new (function() {
             app.processFoursquareResponse
         );
     });
-    
+    // List of features to bind to panel.
     self.features = ko.observableArray();
-    
+    // Number of foursquare results to bind to input-group-addon.
+    self.foursquareCount = ko.observable(0);
+    // Moves map to selected image and if mobile view it collapses panel.
     self.panTo = function(feature) {
         document.getElementById("map-canvas").focus();
         if (self.mobileView()) self.sidebarVisible(false);
@@ -159,14 +153,20 @@ app.viewModel = new (function() {
         app.showInfoWindow(feature);
     };
 })();
-app.width = window.innerWidth;
-app.height = window.innerHeight;
+
+/**
+ * Store the window size in app namespace and update it on resize.
+ */
 window.onresize = function() {
+    // Update window size observables in KO view model.
     app.viewModel.win_width(window.innerWidth);
     app.viewModel.win_height(window.innerHeight);
+    // Update app window size reference.
     app.width = window.innerWidth;
     app.height = window.innerHeight;
 }
+app.width = window.innerWidth;
+app.height = window.innerHeight;
 
 /**
  * This is the callback function used in the async JSON for processing locations
@@ -183,20 +183,22 @@ app.processFoursquareResponse = function(json) {
     }
     // Add new search results.
     var items = json.response.groups['0'].items;
+    // Update observable for number of foursquare features.
+    app.viewModel.foursquareCount(items.length);
     if (items.length == 0) {
         alert('No results found for "' + app.viewModel.searchPhrase() + '"');
-        return;
-    }
-    for (var i = 0; i &lt; items.length; i = i+1) {
-        var feature = {
-            title: items[i].venue.name,
-            icon: 'icons/foursquare.png',
-            position: {
-                lat: items[i].venue.location.lat,
-                lon: items[i].venue.location.lng
-            },
-        };
-        app.addMapMarker(feature, 0);
+    } else {
+        for (var i = 0; i &lt; items.length; i = i+1) {
+            var feature = {
+                title: items[i].venue.name,
+                icon: 'icons/foursquare.png',
+                position: {
+                    lat: items[i].venue.location.lat,
+                    lon: items[i].venue.location.lng
+                },
+            };
+            app.addMapMarker(feature, 0);
+        }
     }
 };
 

@@ -35,7 +35,12 @@
                     event: {mouseover: sidebarSetVisible, mouseout: sidebarSetInvisible}">
         <div class="row-fluid text-center">
             Explore With FOURSQUARE!
-            <input placeholder="FOURSQUARE" data-bind="value: searchPhrase">
+            <div class="input-group input-group-sm">
+                <div class="input-group-addon" style="background-color: blue; color: white">
+                    <strong data-bind="text: foursquareCount"></strong>
+                </div>
+                <input class="form-control" placeholder="FOURSQUARE" data-bind="value: searchPhrase">
+            </div>
         </div>
         <div id="legend" class="row-fluid">
             <table>
