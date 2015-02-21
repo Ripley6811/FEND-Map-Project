@@ -50,16 +50,16 @@ app.viewModel = new (function() {
         }
     });
     // Window size and change detection.
-    self.win_width = ko.observable(window.innerWidth);
-    self.win_height = ko.observable(window.innerHeight);
+    self.winWidth = ko.observable(window.innerWidth);
+    self.winHeight = ko.observable(window.innerHeight);
     // Boolean for switching to/from mobile (small) view.
     self.mobileView = ko.computed(function() {
-        return self.win_width() < 992; 
+        return self.winWidth() < 992; 
     });
     // Register a listening to change height of panel list on resize.
     ko.computed(function() {
         document.getElementById('feature-list')
-            .style.height = [self.win_height() - 150, 'px'].join('');
+            .style.height = [self.winHeight() - 150, 'px'].join('');
     });
     // Register a listener for search phrase changes.
     self.searchPhrase.subscribe(function(newTerm) {
@@ -90,8 +90,8 @@ app.viewModel = new (function() {
  */
 window.onresize = function() {
     // Update window size observables in KO view model.
-    app.viewModel.win_width(window.innerWidth);
-    app.viewModel.win_height(window.innerHeight);
+    app.viewModel.winWidth(window.innerWidth);
+    app.viewModel.winHeight(window.innerHeight);
     // Update app window size reference.
     app.width = window.innerWidth;
     app.height = window.innerHeight;
