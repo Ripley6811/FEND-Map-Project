@@ -14,8 +14,10 @@ This is a map web site showing places that I like to go to and my photography fr
 
 On desktop computer and large screens, the side panel is minimized and will move out with mouseover.
 On smaller screens the side panel is hidden and a blue bar shows on the side. Click the bar to 
-show the side panel. The side panel containes a foursquare search box and a list of features that are shown 
-on the map. Click any feature in the list to be taken to its location.
+show the side panel. The side panel contains a foursquare search box and a list of features that are shown 
+on the map. Click any feature in the list to be taken to its location. Enter a search term in the 
+foursquare search box and results will be added to the top of the feature list below. A number next to the
+search box indicates the number of results found.
 
 ##### Features:
 - **Clickable map markers** display images and short descriptions.
