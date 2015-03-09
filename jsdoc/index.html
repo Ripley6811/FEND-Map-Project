@@ -42,6 +42,10 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
+							<a href="global.html#errorSplash">errorSplash</a>
+						</li>
+						
+						<li>
 							<a href="global.html#initialize">initialize</a>
 						</li>
 						
@@ -99,18 +103,38 @@
 </ul>
 <h2>Overview</h2>
 <p>This is a map web site showing places that I like to go to and my photography from around where I live in Nanzhi, Taiwan. This web site uses the Google Maps, Google Street View Image, Flickr, and Foursquare APIs.  It also uses Bootstrap and Knockout.js for styling and showing a dynamic list of links.</p>
-<p>Features:
-- <strong>Clickable map markers</strong> display images and short descriptions.
-- <strong>Flickr images</strong> that link to a larger version on the Flickr web site.
-- <strong>Google Street View images</strong> displayed for non-Flickr locations.
-- <strong>Foursquare search</strong> box for finding other locations like a &quot;coffee shop&quot;.
-- Clickable <strong>list view of markers</strong> that pan the map to a selected marker.
-- List view and map markers update during search using Knockout.js' <code>observableArray</code>.</p>
-<p>Build tools:
-- <strong>Bootstrap</strong> for css styling.
-- <strong>KnockoutJS</strong> for dynamically updating list of markers during search.
-- <strong>Grunt</strong> for creating minified <em>build</em> css and js files, and creating the README and JSDoc files.
-- <strong>Brackets</strong> editor.</p>
+<p>On desktop computer and large screens, the side panel is minimized and will move out with mouseover.
+On smaller screens the side panel is hidden and a blue bar shows on the side. Click the bar to 
+show the side panel. The side panel contains a foursquare search box and a list of features that are shown 
+on the map. Click any feature in the list to be taken to its location. Enter a search term in the 
+foursquare search box and results will be added to the top of the feature list below. A number next to the
+search box indicates the number of results found.</p>
+<p>Error handling. If the Google API cannot load then a splash screen telling user to check internet connection appears.
+If the web page cannot connect with Foursquare to perform a search then an alert box appears saying it is unavailable.
+If the web page cannot connect with Flickr to load geo-photos then an &quot;unavailable&quot; badge appears under respective icon in legend.</p>
+<h5>Features:</h5>
+<ul>
+<li><strong>Clickable map markers</strong> display images and short descriptions.</li>
+<li><strong>Flickr images</strong> that link to a larger version on the Flickr web site.</li>
+<li><strong>Google Street View images</strong> displayed for non-Flickr locations.</li>
+<li><strong>Foursquare search</strong> box for finding other locations like a &quot;coffee shop&quot;.</li>
+<li>Clickable <strong>list view of markers</strong> that pan the map to a selected marker.</li>
+<li>List view and map markers update during search using Knockout.js' <code>observableArray</code>.</li>
+</ul>
+<h5><code>src</code> Files:</h5>
+<ul>
+<li><strong>app.js</strong> - Main program.</li>
+<li><strong>features.js</strong> - Contains an array of pre-defined favorite locations for display.</li>
+<li><strong>foursquare.js</strong> - Ajax-related methods for communicating with Foursquare.</li>
+<li><strong>flickr.js</strong> - Ajax-related methods for communicating with Flickr.</li>
+</ul>
+<h5>Build tools:</h5>
+<ul>
+<li><strong>Bootstrap</strong> for css styling.</li>
+<li><strong>KnockoutJS</strong> for dynamically updating list of markers during search.</li>
+<li><strong>Grunt</strong> for creating minified <em>build</em> css and js files, and creating the README and JSDoc files.</li>
+<li><strong>Brackets</strong> editor.</li>
+</ul>
 <h2>Links</h2>
 <ul>
 <li><a href="http://ripley6811.github.io/frontend-nanodegree-map-project/">Live web site</a></li>
@@ -138,11 +162,19 @@
 </ul>
 </li>
 <li><a href="http://kylerush.net/blog/flickr-api/">How to use the Flickr API</a></li>
-<li><a href="http://learn.knockoutjs.com/#/?tutorial=intro">Knockoutjs tutorial</a></li>
+<li><a href="http://learn.knockoutjs.com/#/?tutorial=intro">Knockoutjs tutorial</a><ul>
+<li><a href="http://knockoutjs.com/documentation/css-binding.html">Knockoutjs &quot;css&quot; binding</a></li>
 <li><a href="http://stackoverflow.com/questions/10659665/knockout-template-using-data-bind-to-image-src-property-not-working">How to data-bind to image path with KnockoutJS</a></li>
+</ul>
+</li>
 <li><a href="http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css">How to add scrollbar to div</a></li>
 <li><a href="http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/">How to style placeholder text in input field</a></li>
-<li><a href="http://getbootstrap.com/components/">Bootstrap Documentation</a></li>
+<li><a href="http://getbootstrap.com/components/">Bootstrap Documentation</a><ul>
+<li><a href="http://getbootstrap.com/components/#jumbotron">Jumbotron implementation</a></li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest">How to monitor XMLHttpRequest progress and add event listeners</a></li>
+<li><a href="http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file#Windows_Vista">How to test connection errors (link and instructions in Udacity project feedback)</a></li>
 </ul>
 <h2>Project First Steps</h2>
 <h3>Steps for setting up directory structure</h3>
@@ -263,7 +295,7 @@ Released under the MIT license</p></article>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Tue Jan 27th 2015 using the <a
+		on Mon Mar 9th 2015 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

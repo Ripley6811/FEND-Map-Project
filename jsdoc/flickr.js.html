@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Project #5 Source: foursquare.js</title>
+	<title>Project #5 Source: flickr.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,54 +66,112 @@
 					
 
 
-		<h1 class="page-title">Source: foursquare.js</h1>
+		<h1 class="page-title">Source: flickr.js</h1>
     
 <section>
 	<article>
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
- * This file manages Foursquare API requests.
+ * This file manages Flickr requests.
  */
 
 var app = app || {};
 
+app.flickr_user_id = '91602303%40N03';
+
 /**
- * Send a search request to Foursquare and process the response.
- * @param {Number}   lat        Latitude of current map center.
- * @param {Number}   lon        Longitude of current map center.
- * @param {String}   searchTerm Search term entered by user.
- * @param {Function} callback   Function to send the response to.
+ * Request a list of my photos from Flickr. Parses the response and passes
+ * the photo list to the callback.
+ * @param {Function} callback Pass Flickr response photo list to callback.
  */
-app.getFoursquareResponse = function(lat, lon, searchTerm, callback) {
+app.getPhotoList = function(callback) {
     'use strict';
     var xmlhttp = new XMLHttpRequest();
-    
-    // Set up callback
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             var json = JSON.parse(xmlhttp.response);
-            if (json.meta.code === 200) {
-                callback(json);
+            if (json.stat === 'ok') {
+                callback(json.photos.photo);
             } else {
-                console.log("ERROR in app.getFoursquareResponse: " + json.message);
+                console.log("ERROR in app.getPhotoList: " + json.message);
             }
         }
     };
     xmlhttp.addEventListener('error', function() {
-        alert('Unable to connect with Foursquare.com.');
+        callback({error: true});
     });
     
-    var requestString = [
-        'https://api.foursquare.com/v2/venues/explore',
-        '?client_id=P0APIITDRLPFDGL1ARPRCWMVV055QQOACFUWVNZDWLGLDSZB',
-        '&client_secret=SHHYNZZT1QTSR45SQQ1MRQV4FZKHKNYLGJ1LRZVT0HB5RFJU',
-        '&v=20130815',
-        '&ll=' + lat + ',' + lon,
-        '&radius=8000',
-        '&query=' + searchTerm
-        ].join('');
-    xmlhttp.open('GET', requestString, true);
+    var requestParams = [
+        'method=flickr.people.getPublicPhotos',
+        'api_key=e224e71bda1508efe89de86b3b30ed9f',
+        'user_id=' + app.flickr_user_id,
+        'per_page=500',
+        'format=json',
+        'nojsoncallback=1'
+    ];
+    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
     xmlhttp.send();
+};
+
+/**
+ * Request the geo information for a photo and add it to the photo
+ * object. Photo object is then passed to callback if a location 
+ * exists. Called by `app.addPhotoMarkers`.
+ * @param {Object}   photo    JSON returned for a Flickr photo.
+ * @param {Function} callback Pass each photo that has location to callback.
+ * @see app.addPhotoMarkers
+ */
+app.getPhotoGeo = function(photo, callback) {
+    'use strict';
+//    if (photo.title.substring(0, 2) === '20') return;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        console.log(xmlhttp.readyState, xmlhttp);
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            var json = JSON.parse(xmlhttp.response);
+            // stat 'ok' if coordinates exists.
+            if (json.stat === 'ok') {
+                photo.position = { lat: json.photo.location.latitude,
+                                   lon: json.photo.location.longitude };
+                callback(photo);
+            }
+        } else {
+            console.log(xmlhttp);
+        }
+    };
+    
+    var requestParams = [
+        'method=flickr.photos.geo.getLocation',
+        'api_key=e224e71bda1508efe89de86b3b30ed9f',
+        'photo_id=' + photo.id,
+        'format=json',
+        'nojsoncallback=1'
+    ];
+    xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
+    xmlhttp.send();
+};
+
+/**
+ * Create an html Flickr image link from feature object.
+ * @param   {Object} feature Contains information about a map location.
+ * @returns {String} IMG tag wrapped in a link to photo on Flickr.com.
+ */
+app.toFlickrDiv = function(feature) {
+    // Add a Flickr image and link
+    imgDiv = [
+        '&lt;a href="https://www.flickr.com/photos/{user-id}/{id}">',
+        '&lt;img src="https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg" alt="{title}">',
+        '&lt;/a>'
+    ].join('')
+    imgDiv = imgDiv.replace('{user-id}', app.flickr_user_id);
+    imgDiv = imgDiv.replace('{farm-id}', feature.farm);
+    imgDiv = imgDiv.replace('{server-id}', feature.server);
+    imgDiv = imgDiv.replace('{id}', feature.id);
+    imgDiv = imgDiv.replace('{id}', feature.id);
+    imgDiv = imgDiv.replace('{secret}', feature.secret);
+    imgDiv = imgDiv.replace('[mstzb]', app.width &lt; 600 ? 'q' : 'n');
+    imgDiv = imgDiv.replace('{title}', feature.title.replace(/"/g, '&quot;'));
+    return imgDiv;
 };</pre>
 	</article>
 </section>
