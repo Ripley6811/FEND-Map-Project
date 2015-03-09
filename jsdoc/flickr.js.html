@@ -98,7 +98,7 @@ app.getPhotoList = function(callback) {
         }
     };
     xmlhttp.addEventListener('error', function() {
-        alert('Unable to connect with Flickr.com!');
+        callback({error: true});
     });
     
     var requestParams = [

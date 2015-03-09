@@ -285,6 +285,12 @@ app.addFeaturesToMap = function() {
  * @see app.getPhotoList
  */
 app.addPhotoMarkers = function(photoList) {
+    if ('error' in photoList) {
+        return;
+    } else {
+        var flickrStatus = document.getElementById('flickr-availability');
+        flickrStatus.style.display = 'none';
+    }
     for (var i = 0; i &lt; photoList.length; i++) {
         app.getPhotoGeo(photoList[i], function(photo) {
             photo.icon = 'icons/photo.png';

@@ -66,6 +66,8 @@ search box indicates the number of results found.
 - [How to add scrollbar to div](http://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css)
 - [How to style placeholder text in input field](http://coolestguidesontheplanet.com/styling-placeholder-text-input-fields-forms-css/)
 - [Bootstrap Documentation](http://getbootstrap.com/components/)
+    - [Jumbotron implementation](http://getbootstrap.com/components/#jumbotron)
+- [How to monitor XMLHttpRequest progress and add event listeners](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 
 
 
