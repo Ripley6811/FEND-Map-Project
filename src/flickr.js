@@ -62,8 +62,6 @@ app.getPhotoGeo = function(photo, callback) {
                                    lon: json.photo.location.longitude };
                 callback(photo);
             }
-        } else {
-            console.log(xmlhttp);
         }
     };
     
