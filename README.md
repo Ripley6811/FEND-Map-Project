@@ -19,6 +19,10 @@ on the map. Click any feature in the list to be taken to its location. Enter a s
 foursquare search box and results will be added to the top of the feature list below. A number next to the
 search box indicates the number of results found.
 
+Error handling. If the Google API cannot load then a splash screen telling user to check internet connection appears.
+If the web page cannot connect with Foursquare to perform a search then an alert box appears saying it is unavailable.
+If the web page cannot connect with Flickr to load geo-photos then an "unavailable" badge appears under respective icon in legend.
+
 ##### Features:
 - **Clickable map markers** display images and short descriptions.
 - **Flickr images** that link to a larger version on the Flickr web site.
