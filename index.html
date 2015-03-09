@@ -19,12 +19,24 @@
     
     
 <body>
+    <!--Full page div showing connection error if Google api cannot load-->
+    <div id="connection-error-splash">
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h1>Connection Error</h1>
+                <p>Unable to connect with Google Maps API. Check your internet connection and try again.</p>
+            </div>
+        </div>
+    </div>
+    <!--Google Map canvas element-->
     <div id="map-canvas"></div>
+    <!--Side tab shown on smaller screens and mobile devices-->
     <div id="swipe-bar" class="hidden-md hidden-lg" data-bind="click: toggleSidebar">
         <div id="swipe-bar-text" class="text-uppercase">
             <strong>Feature List and Search</strong>
         </div>
     </div>
+    <!--Interactive side bar-->
     <div id="sidebar" class="container-fluid" 
          data-bind="css: {peeking: !mobileView() && !sidebarVisible(), 
                     shy: mobileView() && !sidebarVisible(), 

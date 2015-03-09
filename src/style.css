@@ -114,3 +114,12 @@ div {
 hr {
     margin: 8px;
 }
+
+#connection-error-splash {
+    position: absolute;
+    z-index: 1000;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    display: none;
+}

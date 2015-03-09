@@ -3,15 +3,14 @@
  * @namespace app
  */
 var app = app || {};
-// Default map center; Nanzhi, Taiwan.
-app.center = new google.maps.LatLng(22.735281, 120.353368)
-
 
 /**
  * Set up and run code for filling elements.
  */
 function initialize() {
     'use strict';
+    // Default map center; Nanzhi, Taiwan.
+    app.center = new google.maps.LatLng(22.735281, 120.353368)
     // Create, configure and append a map div.
     app.map = app.getGoogleMap(document.getElementById('map-canvas'));
     // Add markers from the list in features.js.
@@ -21,9 +20,19 @@ function initialize() {
     // Apply KnockoutJS model binding.
     ko.applyBindings(app.viewModel);
 }
-// Why does the google maps listener load the map faster?
-//document.addEventListener('DOMContentLoaded', initialize);
-google.maps.event.addDomListener(window, 'load', initialize);
+
+/**
+ * Show error splash screen if Google did not load.
+ * Else run init function when DOM loads.
+ */
+if (window.google === undefined) {
+    var errorSplash = document.getElementById('connection-error-splash');
+    errorSplash.style.display = 'block';
+} else {
+    // Why does the google maps listener load the map faster?
+    //document.addEventListener('DOMContentLoaded', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
+}
 
 /**
  * Create a KnockoutJS view model instance for the lower right 

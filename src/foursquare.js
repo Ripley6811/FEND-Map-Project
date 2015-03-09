@@ -26,6 +26,9 @@ app.getFoursquareResponse = function(lat, lon, searchTerm, callback) {
             }
         }
     };
+    xmlhttp.addEventListener('error', function() {
+        alert('Unable to connect with Foursquare.com.');
+    });
     
     var requestString = [
         'https://api.foursquare.com/v2/venues/explore',

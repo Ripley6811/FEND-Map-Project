@@ -24,6 +24,9 @@ app.getPhotoList = function(callback) {
             }
         }
     };
+    xmlhttp.addEventListener('error', function() {
+        alert('Unable to connect with Flickr.com!');
+    });
     
     var requestParams = [
         'method=flickr.people.getPublicPhotos',
@@ -50,6 +53,7 @@ app.getPhotoGeo = function(photo, callback) {
 //    if (photo.title.substring(0, 2) === '20') return;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
+        console.log(xmlhttp.readyState, xmlhttp);
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             var json = JSON.parse(xmlhttp.response);
             // stat 'ok' if coordinates exists.
@@ -58,6 +62,8 @@ app.getPhotoGeo = function(photo, callback) {
                                    lon: json.photo.location.longitude };
                 callback(photo);
             }
+        } else {
+            console.log(xmlhttp);
         }
     };
     
@@ -70,7 +76,6 @@ app.getPhotoGeo = function(photo, callback) {
     ];
     xmlhttp.open('GET', 'https://api.flickr.com/services/rest/?' + requestParams.join('&'), true);
     xmlhttp.send();
-    
 };
 
 /**
