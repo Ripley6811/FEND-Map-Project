@@ -19,7 +19,7 @@
 - [Bootstrap Documentation](http://getbootstrap.com/components/)
     - [Jumbotron implementation](http://getbootstrap.com/components/#jumbotron)
 - [How to monitor XMLHttpRequest progress and add event listeners](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
-
+- [How to test connection errors (link and instructions in Udacity project feedback)](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file#Windows_Vista)
 
 
 
