@@ -45,9 +45,9 @@ If the web page cannot connect with Flickr to load geo-photos then an "unavailab
 
 
 ## Links
-- [Live web site](http://ripley6811.github.io/frontend-nanodegree-map-project/)
-- [Git repository](https://github.com/Ripley6811/frontend-nanodegree-map-project/tree/gh-pages)
-- [Documentation](http://ripley6811.github.io/frontend-nanodegree-map-project/jsdoc/)
+- [Live web site](http://ripley6811.github.io/FEND-Map-Project/)
+- [Git repository](https://github.com/Ripley6811/FEND-Map-Project/tree/gh-pages)
+- [Documentation](http://ripley6811.github.io/FEND-Map-Project/jsdoc/)
 
 
 ## Resources
