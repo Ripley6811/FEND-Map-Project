@@ -1,4 +1,5 @@
-# frontend-nanodegree-map-project
+# My Map Project
+## frontend-nanodegree
 
 > Frontend Nanodegree Project 5 - Neighborhood Map
 
