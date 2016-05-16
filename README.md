@@ -197,10 +197,5 @@ module.exports = function(grunt) {
 
 
 ## License and Copyright
-<<<<<<< HEAD
 Copyright (c) 2016 Jay W Johnson, contributors.
 Released under the MIT license
-=======
-Copyright (c) 2015 Jay W Johnson, contributors.
-Released under the MIT license
->>>>>>> refs/remotes/origin/master
