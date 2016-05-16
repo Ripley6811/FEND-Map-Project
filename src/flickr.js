@@ -53,7 +53,7 @@ app.getPhotoGeo = function(photo, callback) {
 //    if (photo.title.substring(0, 2) === '20') return;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-        console.log(xmlhttp.readyState, xmlhttp);
+//        console.log(xmlhttp.readyState, xmlhttp);
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             var json = JSON.parse(xmlhttp.response);
             // stat 'ok' if coordinates exists.
