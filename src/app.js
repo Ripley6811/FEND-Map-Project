@@ -75,7 +75,7 @@ app.viewModel = new (function() {
         if (newTerm == '') return;
         var latlon = app.map.getCenter();
         app.getFoursquareResponse(
-            latlon.k, latlon.D, 
+            latlon.lat(), latlon.lng(), 
             newTerm, 
             app.processFoursquareResponse
         );
